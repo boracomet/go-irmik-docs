@@ -1,0 +1,948 @@
+/* ------------------------------------------------------------------ */
+/* Go-Irmik docs — vanilla JS (i18n, theme, view, GitHub, docs)        */
+/* ------------------------------------------------------------------ */
+
+const copy = {
+  tr: {
+    nav: { docs: "Dokümanlar", guide: "Rehber", api: "API", examples: "Örnekler", blog: "Blog" },
+    search: "Dokümanlarda ara...",
+    hero: {
+      badge: "{v} — Go 1.25",
+      title: "Go için hızlı, yenilikçi",
+      titleAccent: "Web çatısı.",
+      sub: "Go-Irmik, Gin üzerine kurulu bir meta-çatı: ince çekirdek, geniş opt-in katalog. Dosya tabanlı rotalar, SSR ve isteğe bağlı sürücüler.",
+      primary: "Dokümanlar",
+      secondary: "GitHub",
+      installed: "kuruldu",
+    },
+    stats: [
+      { k: "Go", v: "1.25" },
+      { k: "MIT", v: "lisans" },
+      { k: "—", v: "GitHub yıldızı" },
+      { k: "Gin", v: "tabanlı çekirdek" },
+    ],
+    featuresTitle: "Çekirdek ve katalog",
+    featuresSub: "İnce çekirdek; ihtiyaç duyduğunuz paketleri import ederek bağlarsınız.",
+    features: [
+      { icon: "·", t: "Gin tabanlı ince çekirdek", d: "irmik.New etrafında meta-çatı. Ağır sürücüler çekirdeğe gömülmez." },
+      { icon: "·", t: "Dosya tabanlı rotalar", d: "app/ keşfi sayfaları URL’lere eşler; dinamik parçalar ve layout zinciri." },
+      { icon: "·", t: "SSR / SSG / ISR", d: "Aynı uygulamada sunucu render, statik üretim ve ISR önbellek." },
+      { icon: "·", t: "HTMX ve React islands", d: "Kısmi HTMX yanıtları; Vite ile hydrate edilen React adacıkları." },
+      { icon: "·", t: "Markdown ve SEO", d: "İçerik koleksiyonları, OG/JSON-LD, sitemap ve robots." },
+      { icon: "·", t: "Oturum ve CSRF", d: "Çerez oturumları (bellek/Redis) ve CSRF — opt-in paketler." },
+      { icon: "·", t: "Güvenlik varsayılanları", d: "Üretimde zayıf JWT sırları reddedilir; fail-closed başlıklar." },
+      { icon: "·", t: "JWT REST API", d: "irmik/api: /api/v1, JWT doğrulama ve sayfalama yardımcıları." },
+      { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD şablonları ve listeler — examples/admin." },
+      { icon: "·", t: "Auth ve RBAC", d: "JWT/şifre akışları, roller, Can kontrolleri, Gin guard’ları." },
+      { icon: "·", t: "SQL ve GORM", d: "database/sql, migrate, isteğe bağlı GORM; sqlite/postgres/mysql." },
+      { icon: "·", t: "SSE ve WebSocket", d: "irmik/sse ve irmik/ws hub’ları." },
+      { icon: "·", t: "Opt-in katalog", d: "jwt, rbac, paginate, cache, openapi, upload, queue, mail — import ettikçe." },
+      { icon: "·", t: "Lean linking", d: "Import etmediğiniz Redis, S3, OTel veya GORM ikiliye girmez." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build — iskelet, HMR, tanılama." },
+      { icon: "·", t: "Upload ve depolama", d: "Yerel depolama, S3 opt-in, MIME sınırlı yükleme." },
+      { icon: "·", t: "Kuyruk ve zamanlayıcı", d: "Bellek kuyruğu, Asynq/Redis opt-in, cron." },
+      { icon: "·", t: "Formlar ve doğrulama", d: "Form bağlama, CSRF alanı, go-playground/validator." },
+      { icon: "·", t: "OpenAPI / Swagger", d: "OpenAPI belgesi ve CDN üzerinden Swagger UI." },
+      { icon: "·", t: "Admin örnek yolu", d: "examples/admin: oturum + HTMX UI + JWT API." },
+    ],
+    codeTitle: "Idiomatik Go API",
+    codeSub: "Gin benzeri yönlendirici; az soyutlama, net yüzey.",
+    tabs: { basic: "Merhaba Dünya", routing: "Yönlendirme", middleware: "Ara katman" },
+    startTitle: "Hızlı başlangıç",
+    steps: [
+      { t: "Kur", d: "Modüle ekleyin: go get github.com/boracomet/go-irmik" },
+      { t: "Yaz", d: "irmik.New ile yönlendirici oluşturun; rotayı tanımlayın." },
+      { t: "Çalıştır", d: "go run main.go — varsayılan :8080" },
+    ],
+    ctaTitle: "Gündelik iş için Go-Irmik",
+    ctaSub: "Admin panelleri, dahili araçlar, SSR siteler ve JWT REST API.",
+    ctaBtn: "Dokümanları oku",
+    showcaseTitle: "Irmik kullanan projeler",
+    showcaseSub: "İlk örnek: bu doküman sitesi. Diğerleri eklendikçe burada listelenecek.",
+    projectTag: "Bu site",
+    projectName: "Go-Irmik Docs",
+    projectDesc: "İki dilli doküman sitesi; sürüm ve GitHub yıldız sayısı canlı çekilir. Irmik ile servis edilir.",
+    projectCta: "Proje ekle →",
+    ecosystem: "Ekosistem",
+    footerTagline: "Gin tabanlı meta-çatı — ince çekirdek, geniş katalog.",
+    madeWith: "Go-Irmik ile servis edilir",
+    sidebar: "Başlarken",
+  },
+  en: {
+    nav: { docs: "Docs", guide: "Guide", api: "API", examples: "Examples", blog: "Blog" },
+    search: "Search the docs...",
+    hero: {
+      badge: "{v} — Go 1.25",
+      title: "Fast, innovative",
+      titleAccent: "web framework for Go.",
+      sub: "Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers.",
+      primary: "Docs",
+      secondary: "GitHub",
+      installed: "installed",
+    },
+    stats: [
+      { k: "Go", v: "1.25" },
+      { k: "MIT", v: "license" },
+      { k: "—", v: "GitHub stars" },
+      { k: "Gin", v: "based core" },
+    ],
+    featuresTitle: "Core and catalog",
+    featuresSub: "Thin core; import the packages you need and wire them in.",
+    features: [
+      { icon: "·", t: "Gin-based thin core", d: "Meta-framework around irmik.New. Heavy drivers stay out of the core." },
+      { icon: "·", t: "File-based routes", d: "app/ discovery maps pages to URLs, including dynamic segments and layouts." },
+      { icon: "·", t: "SSR / SSG / ISR", d: "Server render, static generation, and ISR cache in the same app." },
+      { icon: "·", t: "HTMX and React islands", d: "Partial HTMX responses; Vite-hydrated React islands." },
+      { icon: "·", t: "Markdown and SEO", d: "Content collections, OG/JSON-LD, sitemap, and robots." },
+      { icon: "·", t: "Sessions and CSRF", d: "Cookie sessions (memory/Redis) and CSRF as opt-in packages." },
+      { icon: "·", t: "Security defaults", d: "Weak JWT secrets rejected in production; fail-closed headers." },
+      { icon: "·", t: "JWT REST API", d: "irmik/api: /api/v1, JWT auth, and pagination helpers." },
+      { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD templates, and lists — see examples/admin." },
+      { icon: "·", t: "Auth and RBAC", d: "JWT/password flows, roles, Can checks, Gin guards." },
+      { icon: "·", t: "SQL and GORM", d: "database/sql, migrate, optional GORM; sqlite/postgres/mysql." },
+      { icon: "·", t: "SSE and WebSocket", d: "irmik/sse and irmik/ws hubs." },
+      { icon: "·", t: "Opt-in catalog", d: "jwt, rbac, paginate, cache, openapi, upload, queue, mail — import as needed." },
+      { icon: "·", t: "Lean linking", d: "Redis, S3, OTel, or GORM you don’t import never enter the binary." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build — scaffold, HMR, diagnostics." },
+      { icon: "·", t: "Upload and storage", d: "Local storage, opt-in S3, MIME-limited uploads." },
+      { icon: "·", t: "Queue and scheduler", d: "In-memory queue, Asynq/Redis opt-in, cron." },
+      { icon: "·", t: "Forms and validation", d: "Form binding, CSRF field, go-playground/validator." },
+      { icon: "·", t: "OpenAPI / Swagger", d: "OpenAPI docs and Swagger UI via CDN." },
+      { icon: "·", t: "Admin example path", d: "examples/admin: sessions + HTMX UI + JWT API." },
+    ],
+    codeTitle: "Idiomatic Go API",
+    codeSub: "Gin-like router; little abstraction, clear surface.",
+    tabs: { basic: "Hello World", routing: "Routing", middleware: "Middleware" },
+    startTitle: "Quick start",
+    steps: [
+      { t: "Install", d: "Add to your module: go get github.com/boracomet/go-irmik" },
+      { t: "Write", d: "Create a router with irmik.New; define a route." },
+      { t: "Run", d: "go run main.go — default :8080" },
+    ],
+    ctaTitle: "Go-Irmik for day-to-day work",
+    ctaSub: "Admin panels, internal tools, SSR sites, and JWT REST APIs.",
+    ctaBtn: "Read the docs",
+    showcaseTitle: "Projects using Irmik",
+    showcaseSub: "First example: this docs site. Others will be listed here as they appear.",
+    projectTag: "This site",
+    projectName: "Go-Irmik Docs",
+    projectDesc: "Bilingual docs site; release tag and star count fetched live. Served with Irmik.",
+    projectCta: "Add a project →",
+    ecosystem: "Ecosystem",
+    footerTagline: "Gin-based meta-framework — thin core, wide catalog.",
+    madeWith: "Served with Go-Irmik",
+    sidebar: "Getting Started",
+  },
+};
+
+function helloMessage(l) {
+  return l === "tr" ? "Merhaba, Irmik" : "Hello, Irmik";
+}
+
+function getSamples(l) {
+  const hi = helloMessage(l);
+  return {
+    basic: `package main
+
+import "github.com/boracomet/go-irmik"
+
+func main() {
+    app := irmik.New()
+
+    app.GET("/", func(c *irmik.Ctx) error {
+        return c.JSON(irmik.Map{
+            "message": "${hi}",
+        })
+    })
+
+    app.Listen(":8080")
+}`,
+    routing: `app := irmik.New()
+
+// Path params & wildcards
+app.GET("/users/:id", getUser)
+app.GET("/files/*path", serveFile)
+
+// Route groups
+api := app.Group("/api/v1")
+api.GET("/posts", listPosts)
+api.POST("/posts", createPost)
+api.DELETE("/posts/:id", deletePost)
+
+app.Listen(":8080")`,
+    middleware: `app := irmik.New()
+
+// Global middleware chain
+app.Use(
+    irmik.Logger(),
+    irmik.Recover(),
+    irmik.CORS(),
+    irmik.RateLimit(100),
+)
+
+// Per-group auth
+admin := app.Group("/admin", AuthRequired)
+admin.GET("/stats", dashboard)
+
+app.Listen(":8080")`,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* State                                                               */
+/* ------------------------------------------------------------------ */
+
+let lang = "tr";
+let dark = true;
+let view = "home";
+let tab = "basic";
+let version = "v0.1.1";
+let stars = null;
+let docsActive = "overview";
+let docsQuery = "";
+let docsSpy = null;
+
+/* ------------------------------------------------------------------ */
+/* Helpers                                                             */
+/* ------------------------------------------------------------------ */
+
+function lookup(path) {
+  return path.split(".").reduce((o, k) => (o == null ? o : o[k]), copy[lang]);
+}
+
+function formatStars(n) {
+  return n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+}
+
+function escapeHtml(line) {
+  return line.replace(/(&|<|>)/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m]));
+}
+
+function highlightHome(code) {
+  const keywords = /\b(package|import|func|return|app|api|admin)\b/g;
+  return code
+    .split("\n")
+    .map((line, i) => {
+      const html = escapeHtml(line)
+        .replace(/(".*?")/g, '<span class="tok-str">$1</span>')
+        .replace(/(\/\/.*)$/g, '<span class="tok-com">$1</span>')
+        .replace(keywords, '<span class="tok-kw">$1</span>')
+        .replace(/\b(GET|POST|DELETE|PUT|Use|Group|Listen|JSON|New)\b/g, '<span class="tok-fn">$1</span>');
+      return `<div class="code-row"><span class="code-ln">${i + 1}</span><span class="code-line">${html || " "}</span></div>`;
+    })
+    .join("");
+}
+
+function highlightDocs(code) {
+  const kw = /\b(package|import|func|return|type|struct|go|if|else|range|var|const)\b/g;
+  return code
+    .split("\n")
+    .map((line) => {
+      const html = escapeHtml(line)
+        .replace(/(".*?"|`.*?`)/g, '<span class="tok-str">$1</span>')
+        .replace(/(#.*|\/\/.*)$/g, '<span class="tok-com">$1</span>')
+        .replace(kw, '<span class="tok-kw">$1</span>')
+        .replace(/\b(GET|POST|PUT|DELETE|Use|Group|Listen|JSON|New|Render|Bind)\b/g, '<span class="tok-fn">$1</span>');
+      return `<div class="docs-code-line">${html || " "}</div>`;
+    })
+    .join("");
+}
+
+function inline(text) {
+  return `<code class="docs-inline">${text}</code>`;
+}
+
+function strong(text) {
+  return `<strong class="text-foreground">${text}</strong>`;
+}
+
+function p(html) {
+  return `<p class="docs-p">${html}</p>`;
+}
+
+function ul(items) {
+  return `<ul class="docs-ul">${items
+    .map((it) => `<li class="docs-li"><span class="docs-bullet"></span><span class="docs-li-text">${it}</span></li>`)
+    .join("")}</ul>`;
+}
+
+function callout(html, tone) {
+  const cls = tone === "warn" ? "docs-callout docs-callout-warn" : "docs-callout";
+  return `<div class="${cls}">${html}</div>`;
+}
+
+function codeBlock(code, file) {
+  const fileBar = file ? `<div class="docs-code-file">${file}</div>` : "";
+  return `<div class="docs-code">${fileBar}<div class="docs-code-body">${highlightDocs(code)}</div></div>`;
+}
+
+function badges() {
+  return `<div class="docs-badges">
+    <span class="badge"><span class="badge-label">Go</span><span class="badge-value">1.25</span></span>
+    <span class="badge"><span class="badge-label">License</span><span class="badge-value">MIT</span></span>
+    <span class="badge"><span class="badge-label">release</span><span class="badge-value">v0.1.1</span></span>
+    <span class="badge"><span class="badge-label">build</span><span class="badge-value badge-value-ok">passing</span></span>
+  </div>`;
+}
+
+function catalogGrid(items) {
+  return `<div class="catalog-grid">${items
+    .map(
+      ([pkg, desc]) =>
+        `<div class="catalog-card"><code>${pkg}</code><p>${desc}</p></div>`,
+    )
+    .join("")}</div>`;
+}
+
+/* ------------------------------------------------------------------ */
+/* Docs sections                                                       */
+/* ------------------------------------------------------------------ */
+
+const sections = [
+  {
+    id: "overview",
+    title: { tr: "Genel bakış", en: "Overview" },
+    body: (l) =>
+      badges() +
+      p(
+        l === "tr"
+          ? `${strong("Irmik")}, Go için Gin tabanlı bir meta-çatı: ${strong("ince çekirdek")} ve ${strong("geniş opt-in katalog")}. Admin / dahili sistemler ve SSR siteler için; dosya tabanlı rotalar, sunucu render ve isteğe bağlı sürücüler — her ikiliye gömülü megakit değil.`
+          : `${strong("Irmik")} is a Gin-based meta-framework for Go: a ${strong("thin core")} and a ${strong("wide opt-in catalog")}. Aimed at admin / internal systems and SSR sites that want file routes, server rendering, and optional drivers — not a megakit in every binary.`,
+      ) +
+      p(
+        l === "tr"
+          ? `Birincil ürün yolu: ${inline("examples/admin")} — oturum + HTMX yönetim arayüzü ve ${inline("irmik/paginate")}, ${inline("irmik/rbac")} ile JWT API. SPA istemcileriyle de kullanılabilir.`
+          : `Primary product path: ${inline("examples/admin")} — session + HTMX admin UI and a JWT API with ${inline("irmik/paginate")} and ${inline("irmik/rbac")}. Usable with SPA clients as well.`,
+      ),
+  },
+  {
+    id: "whats-new",
+    title: { tr: "v0.1.1'de neler var", en: "What's new in v0.1.1" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? `Duyarlı görseller ve bir geliştirme overlay’i. Üretim davranışı aynı kalır: overlay ${inline("development")} dışında monte edilmez.`
+          : `Responsive images and a development overlay. Production behavior is unchanged: the overlay is not mounted outside ${inline("development")}.`,
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `${strong("irmik/imagex pipeline")} — opt-in ${inline("Pipeline")}, ${inline("/_irmik/img")} üzerinden servis eder; ${inline("{{ img }}")} yardımcısı ${inline("srcset")} üretir (375 / 768 / 1440, WebP). Yalnızca yerel dosyalar; uzak URL’ler ve rasgele genişlikler reddedilir. Hero görsellerinde ${inline("priority")} ile lazy-load kapatılabilir.`,
+              `${strong("Upload variants")} — ${inline("Variants")} / ${inline("WriteVariants")} kayıt anında izinli genişlikleri encode eder (${inline("name-375.webp")}, ${inline("name-1440.webp")}); admin medya için.`,
+              `${strong("Dev overlay")} — geliştirmede HTML sayfalarına sol altta Irmik rozeti eklenir. Panel şablon ve pencere hatalarını, dosya rotalarını ve dinleme adresini listeler. ${inline("irmik dev")}, ${inline("app/")} veya ${inline("templates/")} kaydından sonra tarayıcıyı yeniler. Island derleme hataları Vite overlay’de kalır.`,
+              `Dokümanlar: katalog, mimari ve changelog güncellendi.`,
+            ]
+          : [
+              `${strong("irmik/imagex pipeline")} — opt-in ${inline("Pipeline")} serves ${inline("/_irmik/img")} and an ${inline("{{ img }}")} helper that emits ${inline("srcset")} (375 / 768 / 1440, WebP). Local files only; remote URLs and arbitrary widths are rejected. Hero images can set ${inline("priority")} so they are not lazy-loaded.`,
+              `${strong("Upload variants")} — ${inline("Variants")} / ${inline("WriteVariants")} encode allowlisted widths at save time (${inline("name-375.webp")}, ${inline("name-1440.webp")}) for admin media.`,
+              `${strong("Dev overlay")} — in development, HTML pages get a bottom-left Irmik badge. The panel lists template and window errors, file routes, and listen address. ${inline("irmik dev")} reloads the browser after ${inline("app/")} or ${inline("templates/")} saves. Island compile errors stay in the Vite overlay.`,
+              `Docs: catalog, architecture, and changelog updates.`,
+            ],
+      ) +
+      codeBlock(
+        `go get github.com/boracomet/go-irmik@v0.1.1
+go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
+        "terminal",
+      ),
+  },
+  {
+    id: "who-for",
+    title: { tr: "Kimler için?", en: "Who is this for?" },
+    body: (l) =>
+      ul(
+        l === "tr"
+          ? [
+              "Gin bilen, üstüne yapı ve keşfedilebilirlik isteyen Go ekipleri.",
+              "Admin panelleri, dahili araçlar ve SSR ağırlıklı ürünler kuranlar.",
+              "Bağımlılıkları ihtiyaç oldukça ekleyen, yalın ikili dosya sevenler.",
+            ]
+          : [
+              "Go teams who know Gin and want structure and discoverability on top.",
+              "Builders of admin panels, internal tools and SSR-heavy products.",
+              "People who like lean binaries and add dependencies only when needed.",
+            ],
+      ),
+  },
+  {
+    id: "who-not-for",
+    title: { tr: "Kimler için değil?", en: "Who is this NOT for?" },
+    body: (l) =>
+      ul(
+        l === "tr"
+          ? [
+              'Her şeyi tek pakette isteyen "batteries-included" mega-çatı arayanlar.',
+              "Gin soyutlamasından tamamen kaçınmak isteyen projeler.",
+              "Sıfır yapılandırmayla dev SPA'ler kuran, sunucu istemeyen ekipler.",
+            ]
+          : [
+              "Teams wanting a batteries-included megaframework with everything in one package.",
+              "Projects that want to avoid the Gin abstraction entirely.",
+              "Teams building giant SPAs with zero config and no server at all.",
+            ],
+      ),
+  },
+  {
+    id: "why-irmik",
+    title: { tr: "Neden Irmik?", en: "Why Irmik" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? 'Irmik "ince çekirdek + geniş katalog" modelini kullanır. Çekirdek küçük kalır; auth, cache, WebSocket gibi yetenekleri yalnızca ihtiyaç duydukça bağlarsınız.'
+          : 'Irmik uses a "thin core + wide catalog" model. The core stays small; you link auth, cache, WebSocket, and similar only when you need them.',
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `${strong("Lean linking:")} Kullanmadığın sürücü ikiliye girmez.`,
+              `${strong("Keşfedilebilir:")} ${inline("irmik")} CLI ile rotaları ve modülleri listele.`,
+              `${strong("Güvenli varsayılanlar:")} Üretimde zayıf sırlar reddedilir.`,
+            ]
+          : [
+              `${strong("Lean linking:")} a driver you don't use never enters the binary.`,
+              `${strong("Discoverable:")} list routes and modules with the ${inline("irmik")} CLI.`,
+              `${strong("Safe defaults:")} weak secrets are rejected in production.`,
+            ],
+      ),
+  },
+  {
+    id: "quick-start",
+    title: { tr: "Hızlı başlangıç", en: "Quick start" },
+    body: (l) =>
+      p(l === "tr" ? "Üç adımda çalışan bir sunucu:" : "A running server in three steps:") +
+      codeBlock(
+        `# 1 — ${l === "tr" ? "kur" : "install"}
+go get github.com/boracomet/go-irmik
+
+# 2 — ${l === "tr" ? "yeni proje" : "new project"}
+irmik new my-app && cd my-app
+
+# 3 — ${l === "tr" ? "çalıştır" : "run"}
+irmik dev   # http://localhost:8080`,
+        "terminal",
+      ) +
+      codeBlock(
+        `package main
+
+import "github.com/boracomet/go-irmik"
+
+func main() {
+    app := irmik.New()
+
+    app.GET("/", func(c *irmik.Ctx) error {
+        return c.JSON(irmik.Map{"message": "${helloMessage(l)}"})
+    })
+
+    app.Listen(":8080")
+}`,
+        "main.go",
+      ),
+  },
+  {
+    id: "rendering",
+    title: { tr: "Render modları", en: "Rendering modes" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? "Irmik aynı uygulamada üç render modunu destekler; her rota kendi modunu seçebilir."
+          : "Irmik supports three rendering modes in the same app; each route can pick its own.",
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `${strong("SSR")} — her istekte sunucuda render.`,
+              `${strong("SSG")} — derleme sırasında statik HTML.`,
+              `${strong("ISR")} — önbellek + arka planda yeniden doğrulama.`,
+              `${strong("HTMX / islands")} — kısmi yanıtlar ve Vite ile hydrate adacıklar.`,
+            ]
+          : [
+              `${strong("SSR")} — rendered on the server per request.`,
+              `${strong("SSG")} — static HTML at build time.`,
+              `${strong("ISR")} — cache with background revalidation.`,
+              `${strong("HTMX / islands")} — partials and Vite-hydrated islands.`,
+            ],
+      ) +
+      codeBlock(
+        `app.GET("/dashboard", func(c *irmik.Ctx) error {
+    return c.Render("dashboard", irmik.Map{
+        "mode": "ssr",
+        "user": c.User(),
+    })
+})`,
+        "routes/index.go",
+      ),
+  },
+  {
+    id: "routing",
+    title: { tr: "Dosya tabanlı yönlendirme", en: "File-based routing" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? `${inline("routes/")} klasörünüzdeki dosyalar otomatik olarak URL'lere eşlenir. Dinamik parçalar için köşeli parantez kullanılır.`
+          : `Files in your ${inline("routes/")} folder map to URLs automatically. Use brackets for dynamic segments.`,
+      ) +
+      codeBlock(`routes/
+├── index.go          →  /
+├── about.go          →  /about
+├── posts/
+│   ├── index.go      →  /posts
+│   └── [id].go       →  /posts/:id
+└── admin/
+    └── [...path].go  →  /admin/*path`),
+  },
+  {
+    id: "security",
+    title: { tr: "Güvenlik", en: "Security" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? "Güvenlik varsayılan olarak açıktır. Üretim uygulamaları boş veya bilinen demo JWT sırlarını dinlemeden önce reddeder."
+          : "Security is on by default. Production apps reject empty and known demo JWT secrets before they listen.",
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `JWT erişim jetonları bir ${inline("jti")} içerir.`,
+              "Dönen (rotating) refresh jetonları ve kullanıcı bazlı iptal desteği.",
+              'WebSocket, CORS, proxy ve upload varsayılanları "fail-closed" çalışır.',
+              `${inline("MiddlewareJWT")} geçersiz bir jetonu yetkisiz sayar.`,
+            ]
+          : [
+              `JWT access tokens include a ${inline("jti")}.`,
+              "Rotating refresh tokens and user-level revocation support.",
+              "WebSocket, CORS, proxy and upload defaults fail closed.",
+              `${inline("MiddlewareJWT")} treats a present invalid token as unauthorized.`,
+            ],
+      ) +
+      callout(
+        l === "tr"
+          ? 'Güvensiz bir davranışa gerçekten ihtiyacınız varsa, onu açık bir "unsafe" seçeneğiyle etkinleştirmeniz gerekir.'
+          : 'If you truly need an unsafe behaviour, you must enable it with an explicit "unsafe" option.',
+        "warn",
+      ),
+  },
+  {
+    id: "realtime",
+    title: { tr: "Gerçek zamanlı", en: "Realtime" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? `Gerçek zamanlı özellikler için ${inline("irmik/websocket")} ve Server-Sent Events yerleşik olarak gelir.`
+          : `For real-time features, ${inline("irmik/websocket")} and Server-Sent Events come built in.`,
+      ) +
+      codeBlock(`app.WS("/live", func(c *irmik.Socket) error {
+    for msg := range c.Recv() {
+        c.Broadcast("room", msg)
+    }
+    return nil
+})`),
+  },
+  {
+    id: "cli",
+    title: { tr: "CLI", en: "CLI" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? "irmik CLI proje iskeleti, geliştirme sunucusu ve tanılama sağlar."
+          : "The irmik CLI provides project scaffolding, a dev server and diagnostics.",
+      ) +
+      codeBlock(
+        `irmik new my-app     # ${l === "tr" ? "yeni başlangıç projesi" : "new starter project"}
+irmik dev            # ${l === "tr" ? "sıcak yeniden yükleme" : "hot reload"}
+irmik routes         # ${l === "tr" ? "tüm rotaları listele" : "list every route"}
+irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
+        "terminal",
+      ),
+  },
+  {
+    id: "ecosystem",
+    title: { tr: "Opt-in katalog", en: "Opt-in catalog" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? "İhtiyaç duydukça ekleyin; kullanmadığınız modül ikiliye girmez."
+          : "Add what you need; a module you do not use never enters the binary.",
+      ) +
+      catalogGrid([
+        ["irmik/auth", l === "tr" ? "JWT / oturum yardımcıları" : "JWT / session helpers"],
+        ["irmik/rbac", l === "tr" ? "Rol tabanlı erişim" : "Role-based access"],
+        ["irmik/paginate", l === "tr" ? "Sayfalama yardımcıları" : "Pagination helpers"],
+        ["irmik/sse · ws", "SSE & WebSocket"],
+        ["irmik/cache", l === "tr" ? "Önbellek sürücüleri" : "Cache drivers"],
+        ["irmik/openapi", l === "tr" ? "OpenAPI / Swagger" : "OpenAPI / Swagger"],
+        ["irmik/db · gormx", l === "tr" ? "SQL + isteğe bağlı GORM" : "SQL + optional GORM"],
+        ["irmik/admin · htmx", l === "tr" ? "Admin UI yardımcıları" : "Admin UI helpers"],
+      ]),
+  },
+  {
+    id: "status",
+    title: { tr: "Durum", en: "Status" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? `Güncel etiket ${inline("v0.1.1")} (imagex + dev overlay). İlk etiketlenmiş temel ${inline("v0.1.0")} idi. CI, ${inline("main")} üzerinde yarış (race) testleri, linting ve güvenlik açığı taramaları çalıştırır. API 1.0'a kadar değişebilir.`
+          : `Current tag is ${inline("v0.1.1")} (imagex + dev overlay). The first tagged baseline was ${inline("v0.1.0")}. CI runs race tests, linting and vulnerability checks on ${inline("main")}. The API may change until 1.0.`,
+      ),
+  },
+  {
+    id: "contributing",
+    title: { tr: "Katkıda bulunma", en: "Contributing" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? `Katkılar memnuniyetle karşılanır. Bir konu açın veya PR gönderin; testleri ${inline("go test -race ./...")} ile çalıştırın ve linter'ı geçtiğinizden emin olun.`
+          : `Contributions are welcome. Open an issue or send a PR; run tests with ${inline("go test -race ./...")} and make sure the linter passes.`,
+      ),
+  },
+  {
+    id: "license",
+    title: { tr: "Lisans", en: "License" },
+    body: (l) =>
+      p(
+        l === "tr"
+          ? "MIT Lisansı altında dağıtılır. © 2026 Go-Irmik katkıcıları."
+          : "Distributed under the MIT License. © 2026 the Go-Irmik contributors.",
+      ),
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/* i18n paint                                                          */
+/* ------------------------------------------------------------------ */
+
+function applyI18n() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const val = lookup(el.dataset.i18n);
+    if (val != null) el.textContent = val;
+  });
+  document.getElementById("header-search").placeholder = copy[lang].search;
+
+  document.getElementById("hero-title-lead").textContent = copy[lang].hero.title;
+  document.getElementById("hero-title-accent").textContent = copy[lang].hero.titleAccent;
+  document.getElementById("hero-badge-text").textContent = copy[lang].hero.badge.replace("{v}", version);
+
+  const starsEl = document.getElementById("stat-stars");
+  starsEl.textContent = stars !== null ? formatStars(stars) : copy[lang].stats[2].k;
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.lang === lang);
+  });
+
+  paintFeatures();
+  renderCode();
+  paintDocs();
+}
+
+const NAV_DOCS = {
+  docs: "overview",
+  guide: "quick-start",
+  api: "routing",
+};
+
+const API_SECTIONS = new Set(["routing", "rendering", "cli"]);
+
+function navKeyForSection(id) {
+  if (id === "quick-start") return "guide";
+  if (API_SECTIONS.has(id)) return "api";
+  return "docs";
+}
+
+function paintNavActive() {
+  const activeKey =
+    view === "home" ? "blog" : view === "docs" ? navKeyForSection(docsActive) : null;
+  document.querySelectorAll(".nav-btn").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.nav === activeKey);
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme / view                                                        */
+/* ------------------------------------------------------------------ */
+
+function setDark(next) {
+  dark = next;
+  document.documentElement.classList.toggle("dark", dark);
+  document.querySelector(".icon-sun").classList.toggle("is-hidden", !dark);
+  document.querySelector(".icon-moon").classList.toggle("is-hidden", dark);
+}
+
+function go(next) {
+  view = next;
+  document.getElementById("view-home").classList.toggle("is-hidden", view !== "home");
+  document.getElementById("view-docs").classList.toggle("is-hidden", view !== "docs");
+  paintNavActive();
+  window.scrollTo({ top: 0 });
+  if (view === "docs") {
+    bindDocsSpy();
+  } else {
+    observeReveals();
+  }
+}
+
+function goDocs(sectionId) {
+  docsActive = sectionId || NAV_DOCS.docs;
+  go("docs");
+  paintDocsNav();
+  requestAnimationFrame(() => {
+    const el = document.getElementById(docsActive);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Code tabs                                                           */
+/* ------------------------------------------------------------------ */
+
+function renderCode() {
+  document.getElementById("code-table").innerHTML = highlightHome(getSamples(lang)[tab]);
+  document.querySelectorAll(".code-tab").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.tab === tab);
+  });
+}
+
+function paintFeatures() {
+  const root = document.getElementById("features-grid");
+  if (!root) return;
+  root.innerHTML = copy[lang].features
+    .map(
+      (f, i) =>
+        `<article class="feature-card reveal" style="animation-delay: ${i * 40}ms">
+          <div class="feature-blob"></div>
+          <span class="feature-mark" aria-hidden="true"></span>
+          <h3 class="feature-title">${f.t}</h3>
+          <p class="feature-desc">${f.d}</p>
+        </article>`,
+    )
+    .join("");
+  if (view === "home") observeReveals();
+}
+
+/* ------------------------------------------------------------------ */
+/* Reveal                                                              */
+/* ------------------------------------------------------------------ */
+
+const revealed = new WeakSet();
+let revealIo = null;
+
+function observeReveals() {
+  if (!revealIo) {
+    revealIo = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            revealed.add(e.target);
+            e.target.classList.add("in");
+            revealIo.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+  }
+  document.querySelectorAll(".reveal").forEach((el) => {
+    if (revealed.has(el)) {
+      el.classList.add("in");
+    } else {
+      revealIo.observe(el);
+    }
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/* Docs paint / filter / scrollspy                                     */
+/* ------------------------------------------------------------------ */
+
+function filteredSections() {
+  const locale = lang === "tr" ? "tr-TR" : "en-US";
+  const q = docsQuery.trim().toLocaleLowerCase(locale);
+  if (!q) return sections;
+  return sections.filter((s) => {
+    const searchable = `${s.title[lang]} ${s.body(lang).replace(/<[^>]*>/g, " ")}`;
+    return searchable.toLocaleLowerCase(locale).includes(q);
+  });
+}
+
+function paintDocsNav() {
+  const nav = document.getElementById("docs-nav");
+  nav.innerHTML = filteredSections()
+    .map((s) => {
+      const active = s.id === docsActive ? " is-active" : "";
+      return `<a class="docs-nav-link${active}" href="#${s.id}" data-docs-id="${s.id}">${s.title[lang]}</a>`;
+    })
+    .join("");
+  nav.querySelectorAll("[data-docs-id]").forEach((a) => {
+    a.addEventListener("click", () => {
+      docsActive = a.dataset.docsId;
+      paintDocsNav();
+    });
+  });
+}
+
+function paintDocsContent() {
+  const root = document.getElementById("docs-sections");
+  const matches = filteredSections();
+  root.innerHTML = matches.length
+    ? matches
+    .map(
+      (s) =>
+        `<section class="docs-section">
+          <h2 id="${s.id}" class="docs-h2">
+            <a href="#${s.id}">${s.title[lang]}<span class="pilcrow">¶</span></a>
+          </h2>
+          ${s.body(lang)}
+        </section>`,
+    )
+    .join("")
+    : `<p class="docs-p">${lang === "tr" ? "Eşleşen doküman bölümü bulunamadı." : "No matching documentation sections found."}</p>`;
+
+  document.getElementById("docs-banner-sub").textContent =
+    lang === "tr"
+      ? "Gin tabanlı meta-çatı — ince çekirdek, geniş katalog."
+      : "Gin-based meta-framework — thin core, wide catalog.";
+  document.getElementById("docs-edit-prompt").textContent = lang === "tr" ? "Bir hata mı buldunuz?" : "Found a mistake?";
+  document.getElementById("docs-edit-link").textContent = lang === "tr" ? "GitHub’da düzenle →" : "Edit on GitHub →";
+  document.getElementById("docs-search").placeholder = lang === "tr" ? "Bölüme atla…" : "Jump to…";
+}
+
+function bindDocsSpy() {
+  if (docsSpy) docsSpy.disconnect();
+  docsSpy = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible[0]) {
+        docsActive = visible[0].target.id;
+        paintDocsNav();
+        paintNavActive();
+      }
+    },
+    { rootMargin: "-96px 0px -70% 0px", threshold: 0 },
+  );
+  sections.forEach((s) => {
+    const el = document.getElementById(s.id);
+    if (el) docsSpy.observe(el);
+  });
+}
+
+function paintDocs() {
+  paintDocsContent();
+  paintDocsNav();
+  if (view === "docs") bindDocsSpy();
+}
+
+function setDocsQuery(value) {
+  docsQuery = value;
+  document.getElementById("header-search").value = value;
+  document.getElementById("docs-search").value = value;
+
+  const matches = filteredSections();
+  if (matches.length && !matches.some((section) => section.id === docsActive)) {
+    docsActive = matches[0].id;
+  }
+
+  paintDocs();
+}
+
+/* ------------------------------------------------------------------ */
+/* GitHub                                                              */
+/* ------------------------------------------------------------------ */
+
+function fetchGitHub() {
+  const repo = "boracomet/go-irmik";
+  fetch(`https://api.github.com/repos/${repo}/releases/latest`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (d && d.tag_name) {
+        version = d.tag_name;
+        document.getElementById("hero-badge-text").textContent = copy[lang].hero.badge.replace("{v}", version);
+      }
+    })
+    .catch(() => {});
+  fetch(`https://api.github.com/repos/${repo}`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((d) => {
+      if (d && typeof d.stargazers_count === "number") {
+        stars = d.stargazers_count;
+        document.getElementById("stat-stars").textContent = formatStars(stars);
+      }
+    })
+    .catch(() => {});
+}
+
+/* ------------------------------------------------------------------ */
+/* Boot                                                                */
+/* ------------------------------------------------------------------ */
+
+function boot() {
+  document.querySelectorAll("[data-go]").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      if (el.tagName === "A") e.preventDefault();
+      go(el.dataset.go);
+    });
+  });
+
+  document.querySelectorAll(".nav-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const key = btn.dataset.nav;
+      if (key === "examples") return;
+      if (key === "blog") {
+        e.preventDefault();
+        go("home");
+        const top = document.getElementById("top");
+        if (top) top.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+      if (NAV_DOCS[key]) {
+        e.preventDefault();
+        goDocs(NAV_DOCS[key]);
+      }
+    });
+  });
+
+  document.querySelectorAll(".lang-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      lang = btn.dataset.lang;
+      applyI18n();
+    });
+  });
+
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    setDark(!dark);
+  });
+
+  document.querySelectorAll(".code-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tab = btn.dataset.tab;
+      renderCode();
+    });
+  });
+
+  const headerSearch = document.getElementById("header-search");
+  headerSearch.addEventListener("focus", () => {
+    if (view !== "docs") go("docs");
+  });
+  headerSearch.addEventListener("input", (e) => {
+    if (view !== "docs") go("docs");
+    setDocsQuery(e.target.value);
+  });
+
+  document.getElementById("docs-search").addEventListener("input", (e) => {
+    setDocsQuery(e.target.value);
+  });
+
+  window.addEventListener("scroll", () => {
+    document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 12);
+  });
+
+  setDark(true);
+  paintNavActive();
+  applyI18n();
+  renderCode();
+  observeReveals();
+  fetchGitHub();
+}
+
+document.addEventListener("DOMContentLoaded", boot);
