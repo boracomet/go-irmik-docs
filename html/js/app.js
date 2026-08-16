@@ -10,7 +10,7 @@ const copy = {
       badge: "{v} — Go 1.25",
       title: "Go için hızlı, yenilikçi",
       titleAccent: "Web çatısı.",
-      sub: "Go-Irmik, Gin üzerine kurulu bir meta-çatı: ince çekirdek, geniş opt-in katalog. Dosya tabanlı rotalar, SSR ve isteğe bağlı sürücüler.",
+      sub: "Go-İrmik, Gin üzerine kurulu bir meta-çatı: ince çekirdek, geniş opt-in katalog. Dosya tabanlı rotalar, SSR ve isteğe bağlı sürücüler.",
       primary: "Dokümanlar",
       secondary: "GitHub",
       installed: "kuruldu",
@@ -21,6 +21,8 @@ const copy = {
       { k: "—", v: "GitHub yıldızı" },
       { k: "Gin", v: "tabanlı çekirdek" },
     ],
+    logoRest: "-İrmik",
+    brand: "Go-İrmik",
     featuresTitle: "Çekirdek ve katalog",
     featuresSub: "İnce çekirdek; ihtiyaç duyduğunuz paketleri import ederek bağlarsınız.",
     features: [
@@ -54,18 +56,19 @@ const copy = {
       { t: "Yaz", d: "irmik.New ile yönlendirici oluşturun; rotayı tanımlayın." },
       { t: "Çalıştır", d: "go run main.go — varsayılan :8080" },
     ],
-    ctaTitle: "Gündelik iş için Go-Irmik",
+    ctaTitle: "Gündelik iş için Go-İrmik",
     ctaSub: "Admin panelleri, dahili araçlar, SSR siteler ve JWT REST API.",
     ctaBtn: "Dokümanları oku",
-    showcaseTitle: "Irmik kullanan projeler",
+    showcaseTitle: "İrmik kullanan projeler",
     showcaseSub: "İlk örnek: bu doküman sitesi. Diğerleri eklendikçe burada listelenecek.",
     projectTag: "Bu site",
-    projectName: "Go-Irmik Docs",
-    projectDesc: "İki dilli doküman sitesi; sürüm ve GitHub yıldız sayısı canlı çekilir. Irmik ile servis edilir.",
+    projectName: "Go-İrmik Docs",
+    projectDesc: "İki dilli doküman sitesi; sürüm ve GitHub yıldız sayısı canlı çekilir. İrmik ile servis edilir.",
     projectCta: "Proje ekle →",
     ecosystem: "Ekosistem",
     footerTagline: "Gin tabanlı meta-çatı — ince çekirdek, geniş katalog.",
-    madeWith: "Go-Irmik ile servis edilir",
+    madeWith: "Go-İrmik ile servis edilir",
+    copyright: "© 2026 Go-İrmik. MIT License.",
     sidebar: "Başlarken",
   },
   en: {
@@ -86,6 +89,8 @@ const copy = {
       { k: "—", v: "GitHub stars" },
       { k: "Gin", v: "based core" },
     ],
+    logoRest: "-Irmik",
+    brand: "Go-Irmik",
     featuresTitle: "Core and catalog",
     featuresSub: "Thin core; import the packages you need and wire them in.",
     features: [
@@ -131,12 +136,13 @@ const copy = {
     ecosystem: "Ecosystem",
     footerTagline: "Gin-based meta-framework — thin core, wide catalog.",
     madeWith: "Served with Go-Irmik",
+    copyright: "© 2026 Go-Irmik. MIT License.",
     sidebar: "Getting Started",
   },
 };
 
 function helloMessage(l) {
-  return l === "tr" ? "Merhaba, Irmik" : "Hello, Irmik";
+  return l === "tr" ? "Merhaba, İrmik" : "Hello, Irmik";
 }
 
 function getSamples(l) {
@@ -306,7 +312,7 @@ const sections = [
       badges() +
       p(
         l === "tr"
-          ? `${strong("Irmik")}, Go için Gin tabanlı bir meta-çatı: ${strong("ince çekirdek")} ve ${strong("geniş opt-in katalog")}. Admin / dahili sistemler ve SSR siteler için; dosya tabanlı rotalar, sunucu render ve isteğe bağlı sürücüler — her ikiliye gömülü megakit değil.`
+          ? `${strong("İrmik")}, Go için Gin tabanlı bir meta-çatı: ${strong("ince çekirdek")} ve ${strong("geniş opt-in katalog")}. Admin / dahili sistemler ve SSR siteler için; dosya tabanlı rotalar, sunucu render ve isteğe bağlı sürücüler — her ikiliye gömülü megakit değil.`
           : `${strong("Irmik")} is a Gin-based meta-framework for Go: a ${strong("thin core")} and a ${strong("wide opt-in catalog")}. Aimed at admin / internal systems and SSR sites that want file routes, server rendering, and optional drivers — not a megakit in every binary.`,
       ) +
       p(
@@ -329,7 +335,7 @@ const sections = [
           ? [
               `${strong("irmik/imagex pipeline")} — opt-in ${inline("Pipeline")}, ${inline("/_irmik/img")} üzerinden servis eder; ${inline("{{ img }}")} yardımcısı ${inline("srcset")} üretir (375 / 768 / 1440, WebP). Yalnızca yerel dosyalar; uzak URL’ler ve rasgele genişlikler reddedilir. Hero görsellerinde ${inline("priority")} ile lazy-load kapatılabilir.`,
               `${strong("Upload variants")} — ${inline("Variants")} / ${inline("WriteVariants")} kayıt anında izinli genişlikleri encode eder (${inline("name-375.webp")}, ${inline("name-1440.webp")}); admin medya için.`,
-              `${strong("Dev overlay")} — geliştirmede HTML sayfalarına sol altta Irmik rozeti eklenir. Panel şablon ve pencere hatalarını, dosya rotalarını ve dinleme adresini listeler. ${inline("irmik dev")}, ${inline("app/")} veya ${inline("templates/")} kaydından sonra tarayıcıyı yeniler. Island derleme hataları Vite overlay’de kalır.`,
+              `${strong("Dev overlay")} — geliştirmede HTML sayfalarına sol altta İrmik rozeti eklenir. Panel şablon ve pencere hatalarını, dosya rotalarını ve dinleme adresini listeler. ${inline("irmik dev")}, ${inline("app/")} veya ${inline("templates/")} kaydından sonra tarayıcıyı yeniler. Island derleme hataları Vite overlay’de kalır.`,
               `Dokümanlar: katalog, mimari ve changelog güncellendi.`,
             ]
           : [
@@ -383,11 +389,11 @@ go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
   },
   {
     id: "why-irmik",
-    title: { tr: "Neden Irmik?", en: "Why Irmik" },
+    title: { tr: "Neden İrmik?", en: "Why Irmik" },
     body: (l) =>
       p(
         l === "tr"
-          ? 'Irmik "ince çekirdek + geniş katalog" modelini kullanır. Çekirdek küçük kalır; auth, cache, WebSocket gibi yetenekleri yalnızca ihtiyaç duydukça bağlarsınız.'
+          ? 'İrmik "ince çekirdek + geniş katalog" modelini kullanır. Çekirdek küçük kalır; auth, cache, WebSocket gibi yetenekleri yalnızca ihtiyaç duydukça bağlarsınız.'
           : 'Irmik uses a "thin core + wide catalog" model. The core stays small; you link auth, cache, WebSocket, and similar only when you need them.',
       ) +
       ul(
@@ -443,7 +449,7 @@ func main() {
     body: (l) =>
       p(
         l === "tr"
-          ? "Irmik aynı uygulamada üç render modunu destekler; her rota kendi modunu seçebilir."
+          ? "İrmik aynı uygulamada üç render modunu destekler; her rota kendi modunu seçebilir."
           : "Irmik supports three rendering modes in the same app; each route can pick its own.",
       ) +
       ul(
@@ -599,7 +605,7 @@ irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
     body: (l) =>
       p(
         l === "tr"
-          ? "MIT Lisansı altında dağıtılır. © 2026 Go-Irmik katkıcıları."
+          ? "MIT Lisansı altında dağıtılır. © 2026 Go-İrmik katkıcıları."
           : "Distributed under the MIT License. © 2026 the Go-Irmik contributors.",
       ),
   },
@@ -611,6 +617,7 @@ irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
 
 function applyI18n() {
   document.documentElement.lang = lang;
+  document.title = copy[lang].brand;
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const val = lookup(el.dataset.i18n);
     if (val != null) el.textContent = val;
@@ -620,6 +627,10 @@ function applyI18n() {
   document.getElementById("hero-title-lead").textContent = copy[lang].hero.title;
   document.getElementById("hero-title-accent").textContent = copy[lang].hero.titleAccent;
   document.getElementById("hero-badge-text").textContent = copy[lang].hero.badge.replace("{v}", version);
+  const mascot = document.getElementById("hero-mascot-img");
+  if (mascot) mascot.alt = `${copy[lang].brand} mascot`;
+  const docsMascot = document.querySelector(".docs-banner-img");
+  if (docsMascot) docsMascot.alt = lang === "tr" ? "İrmik maskot" : "Irmik mascot";
 
   const starsEl = document.getElementById("stat-stars");
   starsEl.textContent = stars !== null ? formatStars(stars) : copy[lang].stats[2].k;
