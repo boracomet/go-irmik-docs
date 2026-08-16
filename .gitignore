@@ -25,5 +25,8 @@ vendor/
 .env.*
 !.env.example
 
+# Local Compose host-port override (see docker-compose.override.example.yml)
+docker-compose.override.yml
+
 # Local Irmik cache
 .irmik/

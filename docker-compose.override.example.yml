@@ -1,0 +1,13 @@
+# Local-only host publish. Default docker-compose.yml is Dokploy-safe (expose only).
+#
+# Usage:
+#   cp docker-compose.override.example.yml docker-compose.override.yml
+#   docker compose up --build -d
+#
+# Compose auto-loads docker-compose.override.yml when present.
+# Do not commit docker-compose.override.yml (machine-local).
+
+services:
+  docs:
+    ports:
+      - "8080:8080"

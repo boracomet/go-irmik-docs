@@ -1,8 +1,11 @@
 services:
   docs:
     build: .
-    ports:
-      - "8080:8080"
+    # Dokploy (and similar) reverse-proxies into the Docker network.
+    # Do not publish host ports here — that causes "port is already allocated"
+    # when 8080 is taken on the host. Expose keeps the app reachable to the proxy.
+    expose:
+      - "8080"
     environment:
       IRMIK_ENV: production
       IRMIK_HOST: 0.0.0.0
@@ -19,3 +22,7 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+# Local host access: copy docker-compose.override.example.yml → docker-compose.override.yml
+# (Compose auto-merges it) or: docker compose -f docker-compose.yml -f docker-compose.override.example.yml up --build -d
+# See README.
