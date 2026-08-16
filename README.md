@@ -40,14 +40,14 @@ Compose sets `IRMIK_ENV=production`. **`IRMIK_JWT_SECRET` is required** outside 
 | `IRMIK_JWT_SECRET` | Yes (production) | Long random secret; inject via Dokploy / `.env` |
 | `IRMIK_ENV` | No | Defaults to `production` in the image |
 | `IRMIK_HOST` / `IRMIK_PORT` | No | Defaults `0.0.0.0` / `8080` |
-| `SITE_URL` or `PUBLIC_URL` | No | Public origin (e.g. `https://docs.example.com`) so `og:image` / `twitter:image` become absolute |
+| `SITE_URL` or `PUBLIC_URL` | No | Public origin (e.g. `https://goirmik.org`). HTML defaults to absolute goirmik.org OG tags; when set, the server rewrites `og:url` / `og:image` / `twitter:image` for that domain |
 
-Social previews need an absolute image URL. Set `SITE_URL` (or `PUBLIC_URL`) to your public domain; the server rewrites `/assets/og.png` in the HTML head when serving `/`.
+`index.html` already includes absolute Open Graph URLs for `https://goirmik.org` (WhatsApp/Facebook need `https://...` image URLs). On Dokploy, still set `SITE_URL=https://goirmik.org` so rewrites match production if you fork or mirror the site elsewhere.
 
 ## Deploy on Dokploy
 
 1. Create a **Docker Compose** (or Dockerfile) app pointing at this repo.
-2. Set env: `IRMIK_JWT_SECRET` (secret), optionally `SITE_URL=https://your-domain`.
+2. Set env: `IRMIK_JWT_SECRET` (secret), and `SITE_URL=https://goirmik.org` (recommended).
 3. In the Dokploy UI, set the **container port to 8080**. Dokploy’s reverse proxy reaches the service on the Docker network — you do **not** need a host port publish (`ports:`). Host binds like `8080:8080` often fail with `port is already allocated`.
 4. Attach your domain and deploy — image embeds `html/` (no source bind-mount). Healthcheck hits `http://127.0.0.1:8080/`.
 

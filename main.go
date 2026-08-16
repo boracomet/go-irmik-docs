@@ -62,23 +62,31 @@ func main() {
 	}
 }
 
+const defaultOGImageURL = "https://goirmik.org/assets/og.png"
+const defaultOGPageURL = "https://goirmik.org/"
+
 func serveIndex(c *gin.Context, site fs.FS) {
 	data, err := fs.ReadFile(site, "index.html")
 	if err != nil {
 		c.Status(http.StatusNotFound)
 		return
 	}
-	if abs := absoluteOGImageURL(); abs != "" {
+	if origin := siteOrigin(); origin != "" {
 		html := string(data)
-		html = strings.ReplaceAll(html, `content="/assets/og.png"`, `content="`+abs+`"`)
+		absImage := origin + "/assets/og.png"
+		absPage := origin + "/"
+		// Rewrite hardcoded production defaults (and any relative fallback) for other domains.
+		html = strings.ReplaceAll(html, `content="`+defaultOGImageURL+`"`, `content="`+absImage+`"`)
+		html = strings.ReplaceAll(html, `content="/assets/og.png"`, `content="`+absImage+`"`)
+		html = strings.ReplaceAll(html, `content="`+defaultOGPageURL+`"`, `content="`+absPage+`"`)
 		data = []byte(html)
 	}
 	c.Data(http.StatusOK, "text/html; charset=utf-8", data)
 }
 
-// absoluteOGImageURL returns SITE_URL or PUBLIC_URL + /assets/og.png when set
-// to a valid http(s) origin (needed by social crawlers for Open Graph previews).
-func absoluteOGImageURL() string {
+// siteOrigin returns SITE_URL or PUBLIC_URL as a scheme://host[/path] origin
+// (no trailing slash) when set to a valid http(s) URL.
+func siteOrigin() string {
 	raw := strings.TrimSpace(os.Getenv("SITE_URL"))
 	if raw == "" {
 		raw = strings.TrimSpace(os.Getenv("PUBLIC_URL"))
@@ -90,7 +98,7 @@ func absoluteOGImageURL() string {
 	if err != nil || (u.Scheme != "http" && u.Scheme != "https") || u.Host == "" {
 		return ""
 	}
-	return u.Scheme + "://" + u.Host + strings.TrimSuffix(u.Path, "/") + "/assets/og.png"
+	return u.Scheme + "://" + u.Host + strings.TrimSuffix(u.Path, "/")
 }
 
 func fatal(err error) {
