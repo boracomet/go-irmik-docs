@@ -437,14 +437,16 @@ app.GET("/", home)</pre>
       aria-describedby="cookie-body"
       hidden
     >
-      <img
-        src="assets/cookiemik.png"
-        alt=""
-        class="cookie-banner-img"
-        width="72"
-        height="72"
-        decoding="async"
-      />
+      <div class="cookie-banner-mascot" aria-hidden="true">
+        <img
+          src="assets/cookiemik.png"
+          alt=""
+          class="cookie-banner-img"
+          width="160"
+          height="160"
+          decoding="async"
+        />
+      </div>
       <div class="cookie-banner-copy">
         <p id="cookie-title" class="cookie-banner-title"></p>
         <p id="cookie-body" class="cookie-banner-text"></p>
