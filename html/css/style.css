@@ -534,6 +534,7 @@ pre {
 .hero-copy {
   position: relative;
   z-index: 10;
+  order: 2;
 }
 
 .hero-badge {
@@ -641,13 +642,17 @@ pre {
 .hero-mascot {
   position: relative;
   z-index: 10;
+  order: 1;
   margin: 0 auto;
   width: 100%;
-  max-width: 24rem;
+  max-width: 10rem; /* ~160px on mobile */
+  text-align: center;
 }
 
 .mascot-wrap {
   position: relative;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .mascot-glow {
@@ -712,6 +717,7 @@ pre {
 }
 
 .float-chip {
+  display: none; /* hide chips on small screens — restored at lg */
   position: absolute;
   border-radius: 0.75rem;
   border: 1px solid var(--border);
@@ -725,6 +731,32 @@ pre {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   animation-delay: 1.2s;
+}
+
+/* Quieter orbit at small sizes so a compact mascot stays readable */
+@media (max-width: 1023px) {
+  .orbit {
+    width: 108%;
+    opacity: 0.55;
+  }
+
+  .orbit-dot,
+  .orbit-dot-sm {
+    display: none;
+  }
+
+  .mascot-glow {
+    filter: blur(40px);
+  }
+
+  .hero-grid {
+    gap: 1.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .hero-title {
+    margin-top: 1rem;
+  }
 }
 
 .float-chip span {
@@ -1801,6 +1833,20 @@ pre {
 
   .hero-grid {
     grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .hero-copy {
+    order: 0;
+  }
+
+  .hero-mascot {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+  }
+
+  .float-chip {
+    display: block;
   }
 
   .hero-title {
