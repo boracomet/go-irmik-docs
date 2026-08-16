@@ -70,6 +70,14 @@ const copy = {
     madeWith: "Go-İrmik ile servis edilir",
     copyright: "© 2026 Go-İrmik. MIT License.",
     sidebar: "Başlarken",
+    pageTitle: "Go-İrmik — Go için hızlı, yenilikçi web çatısı",
+    cookie: {
+      title: "Kurabiye mi? İrmik sütü tercih eder — ama tercihler için bir kırıntı yeter.",
+      body: "Dil ve tema tercihlerinizi yerel depolamada (ve gerekirse çerezlerde) tutuyoruz. Takip yok.",
+      accept: "Kabul et",
+      decline: "Reddet",
+      aria: "Çerez ve tercih onayı",
+    },
   },
   en: {
     nav: { docs: "Docs", guide: "Guide", api: "API", examples: "Examples", blog: "Blog" },
@@ -138,6 +146,14 @@ const copy = {
     madeWith: "Served with Go-Irmik",
     copyright: "© 2026 Go-Irmik. MIT License.",
     sidebar: "Getting Started",
+    pageTitle: "Go-Irmik — Fast, innovative web framework for Go",
+    cookie: {
+      title: "Cookies? We prefer milk — but Irmik will take a crumb for prefs.",
+      body: "We use local storage (and cookies if needed) only for language and theme. No tracking crumbs.",
+      accept: "Accept",
+      decline: "Decline",
+      aria: "Cookie and preference consent",
+    },
   },
 };
 
@@ -198,8 +214,45 @@ app.Listen(":8080")`,
 /* State                                                               */
 /* ------------------------------------------------------------------ */
 
-let lang = "tr";
-let dark = true;
+const LANG_KEY = "irmik-lang";
+const THEME_KEY = "irmik-theme";
+const COOKIE_KEY = "irmik-cookie-consent";
+
+function readStoredLang() {
+  try {
+    const saved = localStorage.getItem(LANG_KEY);
+    return saved === "tr" || saved === "en" ? saved : "en";
+  } catch {
+    return "en";
+  }
+}
+
+function hasStoredTheme() {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    return saved === "dark" || saved === "light";
+  } catch {
+    return false;
+  }
+}
+
+function systemPrefersDark() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
+function readInitialDark() {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "dark") return true;
+    if (saved === "light") return false;
+  } catch {
+    /* ignore */
+  }
+  return systemPrefersDark();
+}
+
+let lang = readStoredLang();
+let dark = readInitialDark();
 let view = "home";
 let tab = "basic";
 let version = "v0.1.1";
@@ -617,7 +670,7 @@ irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
 
 function applyI18n() {
   document.documentElement.lang = lang;
-  document.title = copy[lang].brand;
+  document.title = copy[lang].pageTitle;
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const val = lookup(el.dataset.i18n);
     if (val != null) el.textContent = val;
@@ -642,6 +695,7 @@ function applyI18n() {
   paintFeatures();
   renderCode();
   paintDocs();
+  paintCookieBanner();
 }
 
 const NAV_DOCS = {
@@ -670,11 +724,92 @@ function paintNavActive() {
 /* Theme / view                                                        */
 /* ------------------------------------------------------------------ */
 
-function setDark(next) {
+function setDark(next, persist) {
   dark = next;
   document.documentElement.classList.toggle("dark", dark);
-  document.querySelector(".icon-sun").classList.toggle("is-hidden", !dark);
-  document.querySelector(".icon-moon").classList.toggle("is-hidden", dark);
+  const sun = document.querySelector(".icon-sun");
+  const moon = document.querySelector(".icon-moon");
+  if (sun) sun.classList.toggle("is-hidden", !dark);
+  if (moon) moon.classList.toggle("is-hidden", dark);
+  if (persist) {
+    try {
+      localStorage.setItem(THEME_KEY, dark ? "dark" : "light");
+    } catch {
+      /* ignore */
+    }
+  }
+}
+
+function setLang(next) {
+  lang = next === "tr" ? "tr" : "en";
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch {
+    /* ignore */
+  }
+  applyI18n();
+}
+
+/* ------------------------------------------------------------------ */
+/* Cookie banner                                                       */
+/* ------------------------------------------------------------------ */
+
+function cookieConsentValue() {
+  try {
+    return localStorage.getItem(COOKIE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function paintCookieBanner() {
+  const banner = document.getElementById("cookie-banner");
+  if (!banner) return;
+  const c = copy[lang].cookie;
+  banner.setAttribute("aria-label", c.aria);
+  document.getElementById("cookie-title").textContent = c.title;
+  document.getElementById("cookie-body").textContent = c.body;
+  const accept = document.getElementById("cookie-accept");
+  const decline = document.getElementById("cookie-decline");
+  accept.textContent = c.accept;
+  decline.textContent = c.decline;
+  accept.setAttribute("aria-label", c.accept);
+  decline.setAttribute("aria-label", c.decline);
+}
+
+function showCookieBanner() {
+  const banner = document.getElementById("cookie-banner");
+  if (!banner) return;
+  paintCookieBanner();
+  banner.hidden = false;
+  banner.classList.remove("is-hidden");
+}
+
+function hideCookieBanner() {
+  const banner = document.getElementById("cookie-banner");
+  if (!banner) return;
+  banner.classList.add("is-hidden");
+  banner.hidden = true;
+}
+
+function setCookieConsent(value) {
+  try {
+    localStorage.setItem(COOKIE_KEY, value);
+  } catch {
+    /* ignore */
+  }
+  hideCookieBanner();
+}
+
+function initCookieBanner() {
+  const consent = cookieConsentValue();
+  if (consent === "accepted" || consent === "declined") {
+    hideCookieBanner();
+    return;
+  }
+  showCookieBanner();
+  document.getElementById("cookie-accept").addEventListener("click", () => setCookieConsent("accepted"));
+  document.getElementById("cookie-decline").addEventListener("click", () => setCookieConsent("declined"));
 }
 
 function go(next) {
@@ -915,14 +1050,23 @@ function boot() {
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      lang = btn.dataset.lang;
-      applyI18n();
+      setLang(btn.dataset.lang);
     });
   });
 
   document.getElementById("theme-toggle").addEventListener("click", () => {
-    setDark(!dark);
+    setDark(!dark, true);
   });
+
+  const schemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const onSchemeChange = (e) => {
+    if (!hasStoredTheme()) setDark(e.matches, false);
+  };
+  if (schemeQuery.addEventListener) {
+    schemeQuery.addEventListener("change", onSchemeChange);
+  } else if (schemeQuery.addListener) {
+    schemeQuery.addListener(onSchemeChange);
+  }
 
   document.querySelectorAll(".code-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -948,12 +1092,13 @@ function boot() {
     document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 12);
   });
 
-  setDark(true);
+  setDark(dark, false);
   paintNavActive();
   applyI18n();
   renderCode();
   observeReveals();
   fetchGitHub();
+  initCookieBanner();
 }
 
 document.addEventListener("DOMContentLoaded", boot);

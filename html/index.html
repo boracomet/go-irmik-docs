@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="tr" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Go-İrmik</title>
+    <title>Go-Irmik — Fast, innovative web framework for Go</title>
     <meta
       name="description"
-      content="Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, optional drivers."
+      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
     />
 
     <meta property="og:type" content="website" />
@@ -14,7 +14,7 @@
     <meta property="og:title" content="Go-Irmik — Fast, innovative web framework for Go" />
     <meta
       property="og:description"
-      content="Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, optional drivers."
+      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
     />
     <!-- Absolute defaults for WhatsApp/Facebook; SITE_URL/PUBLIC_URL can rewrite for other domains. -->
     <meta property="og:image" content="https://goirmik.org/assets/og.png" />
@@ -26,13 +26,28 @@
     <meta name="twitter:title" content="Go-Irmik — Fast, innovative web framework for Go" />
     <meta
       name="twitter:description"
-      content="Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, optional drivers."
+      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
     />
     <meta name="twitter:image" content="https://goirmik.org/assets/og.png" />
 
     <link rel="icon" href="/assets/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/assets/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
+    <script>
+      (function () {
+        try {
+          var lang = localStorage.getItem("irmik-lang");
+          document.documentElement.lang = lang === "tr" || lang === "en" ? lang : "en";
+          var theme = localStorage.getItem("irmik-theme");
+          var dark =
+            theme === "dark" ||
+            (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {
+          document.documentElement.lang = "en";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="top" class="page">
@@ -43,13 +58,13 @@
               <img src="assets/irmik.png" alt="" class="logo-img" />
             </span>
             <span class="logo-word">
-              <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-İrmik</span>
+              <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-Irmik</span>
             </span>
           </a>
 
           <nav class="nav" aria-label="Main">
-            <button type="button" class="nav-btn" data-nav="docs" data-i18n="nav.docs">Dokümanlar</button>
-            <button type="button" class="nav-btn" data-nav="guide" data-i18n="nav.guide">Rehber</button>
+            <button type="button" class="nav-btn" data-nav="docs" data-i18n="nav.docs">Docs</button>
+            <button type="button" class="nav-btn" data-nav="guide" data-i18n="nav.guide">Guide</button>
             <button type="button" class="nav-btn" data-nav="api" data-i18n="nav.api">API</button>
             <a
               href="https://github.com/boracomet/go-irmik/tree/main/examples"
@@ -58,7 +73,7 @@
               class="nav-btn"
               data-nav="examples"
               data-i18n="nav.examples"
-            >Örnekler</a>
+            >Examples</a>
             <button type="button" class="nav-btn" data-nav="blog" data-i18n="nav.blog">Blog</button>
           </nav>
 
@@ -72,14 +87,14 @@
                 id="header-search"
                 class="search-label"
                 type="search"
-                placeholder="Dokümanlarda ara..."
+                placeholder="Search the docs..."
                 autocomplete="off"
               />
             </label>
 
             <div class="lang-switch">
-              <button type="button" class="lang-btn is-active" data-lang="tr">tr</button>
-              <button type="button" class="lang-btn" data-lang="en">en</button>
+              <button type="button" class="lang-btn" data-lang="tr">tr</button>
+              <button type="button" class="lang-btn is-active" data-lang="en">en</button>
             </div>
 
             <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle theme">
@@ -121,17 +136,17 @@
               </a>
 
               <h1 class="hero-title" id="hero-title">
-                <span id="hero-title-lead">Go için hızlı, yenilikçi</span>
-                <span class="text-gradient" id="hero-title-accent">Web çatısı.</span>
+                <span id="hero-title-lead">Fast, innovative</span>
+                <span class="text-gradient" id="hero-title-accent">web framework for Go.</span>
               </h1>
 
               <p class="hero-sub" data-i18n="hero.sub">
-                Go-İrmik, Gin üzerine kurulu bir meta-çatı: ince çekirdek, geniş opt-in katalog. Dosya tabanlı rotalar, SSR ve isteğe bağlı sürücüler.
+                Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers.
               </p>
 
               <div class="hero-actions">
                 <button type="button" class="btn-primary" data-go="docs">
-                  <span data-i18n="hero.primary">Dokümanlar</span>
+                  <span data-i18n="hero.primary">Docs</span>
                   <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -152,7 +167,7 @@
               <div class="install-bar">
                 <span class="install-prompt">$</span>
                 <span class="install-cmd">go get github.com/boracomet/go-irmik</span>
-                <span class="install-ok">✓ <span data-i18n="hero.installed">kuruldu</span></span>
+                <span class="install-ok">✓ <span data-i18n="hero.installed">installed</span></span>
               </div>
             </div>
 
@@ -167,7 +182,7 @@
                 </div>
                 <img
                   src="assets/irmik.png"
-                  alt="Go-İrmik mascot"
+                  alt="Go-Irmik mascot"
                   id="hero-mascot-img"
                   class="mascot-img animate-float"
                 />
@@ -189,15 +204,15 @@
               </div>
               <div class="stat-cell">
                 <div class="stat-k text-gradient" data-i18n="stats.1.k">MIT</div>
-                <div class="stat-v" data-i18n="stats.1.v">lisans</div>
+                <div class="stat-v" data-i18n="stats.1.v">license</div>
               </div>
               <div class="stat-cell">
                 <div class="stat-k text-gradient" id="stat-stars">—</div>
-                <div class="stat-v" data-i18n="stats.2.v">GitHub yıldızı</div>
+                <div class="stat-v" data-i18n="stats.2.v">GitHub stars</div>
               </div>
               <div class="stat-cell">
                 <div class="stat-k text-gradient" data-i18n="stats.3.k">Gin</div>
-                <div class="stat-v" data-i18n="stats.3.v">tabanlı çekirdek</div>
+                <div class="stat-v" data-i18n="stats.3.v">based core</div>
               </div>
             </div>
           </div>
@@ -205,16 +220,16 @@
 
         <section id="docs" class="section">
           <div class="section-head reveal">
-            <h2 class="section-title" data-i18n="featuresTitle">Çekirdek ve katalog</h2>
-            <p class="section-sub" data-i18n="featuresSub">İnce çekirdek; ihtiyaç duyduğunuz paketleri import ederek bağlarsınız.</p>
+            <h2 class="section-title" data-i18n="featuresTitle">Core and catalog</h2>
+            <p class="section-sub" data-i18n="featuresSub">Thin core; import the packages you need and wire them in.</p>
           </div>
           <div class="features-grid" id="features-grid"></div>
         </section>
 
         <section class="section section-code">
           <div class="section-head reveal">
-            <h2 class="section-title" data-i18n="codeTitle">Idiomatik Go API</h2>
-            <p class="section-sub" data-i18n="codeSub">Gin benzeri yönlendirici; az soyutlama, net yüzey.</p>
+            <h2 class="section-title" data-i18n="codeTitle">Idiomatic Go API</h2>
+            <p class="section-sub" data-i18n="codeSub">Gin-like router; little abstraction, clear surface.</p>
           </div>
           <div class="code-window reveal">
             <div class="code-bar">
@@ -224,9 +239,9 @@
                 <span class="traffic-dot traffic-green"></span>
               </div>
               <div class="code-tabs">
-                <button type="button" class="code-tab is-active" data-tab="basic" data-i18n="tabs.basic">Merhaba Dünya</button>
-                <button type="button" class="code-tab" data-tab="routing" data-i18n="tabs.routing">Yönlendirme</button>
-                <button type="button" class="code-tab" data-tab="middleware" data-i18n="tabs.middleware">Ara katman</button>
+                <button type="button" class="code-tab is-active" data-tab="basic" data-i18n="tabs.basic">Hello World</button>
+                <button type="button" class="code-tab" data-tab="routing" data-i18n="tabs.routing">Routing</button>
+                <button type="button" class="code-tab" data-tab="middleware" data-i18n="tabs.middleware">Middleware</button>
               </div>
               <span class="code-filename">main.go</span>
             </div>
@@ -238,32 +253,32 @@
 
         <section id="start" class="section">
           <div class="section-head reveal">
-            <h2 class="section-title" data-i18n="startTitle">Hızlı başlangıç</h2>
+            <h2 class="section-title" data-i18n="startTitle">Quick start</h2>
           </div>
           <div class="steps-grid">
             <article class="step-card reveal" style="animation-delay: 0ms">
               <div class="step-head">
                 <span class="step-num">1</span>
-                <h3 class="step-title" data-i18n="steps.0.t">Kur</h3>
+                <h3 class="step-title" data-i18n="steps.0.t">Install</h3>
               </div>
-              <p class="step-desc" data-i18n="steps.0.d">Modüle ekleyin: go get github.com/boracomet/go-irmik</p>
+              <p class="step-desc" data-i18n="steps.0.d">Add to your module: go get github.com/boracomet/go-irmik</p>
               <pre class="step-pre">go get github.com/boracomet/go-irmik</pre>
             </article>
             <article class="step-card reveal" style="animation-delay: 80ms">
               <div class="step-head">
                 <span class="step-num">2</span>
-                <h3 class="step-title" data-i18n="steps.1.t">Yaz</h3>
+                <h3 class="step-title" data-i18n="steps.1.t">Write</h3>
               </div>
-              <p class="step-desc" data-i18n="steps.1.d">irmik.New ile yönlendirici oluşturun; rotayı tanımlayın.</p>
+              <p class="step-desc" data-i18n="steps.1.d">Create a router with irmik.New; define a route.</p>
               <pre class="step-pre">app := irmik.New()
 app.GET("/", home)</pre>
             </article>
             <article class="step-card reveal" style="animation-delay: 160ms">
               <div class="step-head">
                 <span class="step-num">3</span>
-                <h3 class="step-title" data-i18n="steps.2.t">Çalıştır</h3>
+                <h3 class="step-title" data-i18n="steps.2.t">Run</h3>
               </div>
-              <p class="step-desc" data-i18n="steps.2.d">go run main.go — varsayılan :8080</p>
+              <p class="step-desc" data-i18n="steps.2.d">go run main.go — default :8080</p>
               <pre class="step-pre">go run main.go
 # → :8080</pre>
             </article>
@@ -273,8 +288,8 @@ app.GET("/", home)</pre>
         <section class="showcase">
           <div class="showcase-inner">
             <div class="section-head reveal">
-              <h2 class="section-title" data-i18n="showcaseTitle">İrmik kullanan projeler</h2>
-              <p class="section-sub" data-i18n="showcaseSub">İlk örnek: bu doküman sitesi. Diğerleri eklendikçe burada listelenecek.</p>
+              <h2 class="section-title" data-i18n="showcaseTitle">Projects using Irmik</h2>
+              <p class="section-sub" data-i18n="showcaseSub">First example: this docs site. Others will be listed here as they appear.</p>
             </div>
             <div class="showcase-wrap reveal">
               <button type="button" class="showcase-card" data-go="docs">
@@ -286,10 +301,10 @@ app.GET("/", home)</pre>
                   <div class="showcase-copy">
                     <span class="showcase-tag">
                       <span class="showcase-tag-dot"></span>
-                      <span data-i18n="projectTag">Bu site</span>
+                      <span data-i18n="projectTag">This site</span>
                     </span>
-                    <h3 class="showcase-name" data-i18n="projectName">Go-İrmik Docs</h3>
-                    <p class="showcase-desc" data-i18n="projectDesc">İki dilli doküman sitesi; sürüm ve GitHub yıldız sayısı canlı çekilir. İrmik ile servis edilir.</p>
+                    <h3 class="showcase-name" data-i18n="projectName">Go-Irmik Docs</h3>
+                    <p class="showcase-desc" data-i18n="projectDesc">Bilingual docs site; release tag and star count fetched live. Served with Irmik.</p>
                   </div>
                   <svg class="arrow-icon showcase-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 6l6 6-6 6" />
@@ -297,7 +312,7 @@ app.GET("/", home)</pre>
                 </div>
               </button>
               <p class="showcase-cta">
-                <a href="https://github.com/boracomet/go-irmik" target="_blank" rel="noreferrer" data-i18n="projectCta">Projenizi ekleyin →</a>
+                <a href="https://github.com/boracomet/go-irmik" target="_blank" rel="noreferrer" data-i18n="projectCta">Add a project →</a>
               </p>
             </div>
           </div>
@@ -307,10 +322,10 @@ app.GET("/", home)</pre>
           <div class="cta-card reveal">
             <div class="cta-glow animate-glow"></div>
             <img src="assets/irmik.png" alt="" class="cta-mascot animate-float" />
-            <h2 class="cta-title" data-i18n="ctaTitle">Gündelik iş için Go-İrmik</h2>
-            <p class="cta-sub" data-i18n="ctaSub">Admin panelleri, dahili araçlar, SSR siteler ve JWT REST API.</p>
+            <h2 class="cta-title" data-i18n="ctaTitle">Go-Irmik for day-to-day work</h2>
+            <p class="cta-sub" data-i18n="ctaSub">Admin panels, internal tools, SSR sites, and JWT REST APIs.</p>
             <button type="button" class="btn-primary btn-cta" data-go="docs">
-              <span data-i18n="ctaBtn">Dokümanları oku</span>
+              <span data-i18n="ctaBtn">Read the docs</span>
               <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
@@ -327,7 +342,7 @@ app.GET("/", home)</pre>
                 id="docs-search"
                 class="docs-search"
                 type="text"
-                placeholder="Bölüme atla…"
+                placeholder="Jump to…"
                 autocomplete="off"
               />
             </div>
@@ -337,20 +352,20 @@ app.GET("/", home)</pre>
             <div class="docs-banner">
               <div class="docs-banner-bg"></div>
               <div class="docs-banner-body">
-                <img src="assets/irmik.png" alt="İrmik maskot" class="docs-banner-img" />
+                <img src="assets/irmik.png" alt="Irmik mascot" class="docs-banner-img" />
                 <div>
                   <div class="docs-readme">README</div>
                   <h1 class="docs-banner-title">
-                    <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-İrmik</span>
+                    <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-Irmik</span>
                   </h1>
-                  <p class="docs-banner-sub" id="docs-banner-sub">Gin tabanlı meta-çatı — ince çekirdek, geniş katalog.</p>
+                  <p class="docs-banner-sub" id="docs-banner-sub">Gin-based meta-framework — thin core, wide catalog.</p>
                 </div>
               </div>
             </div>
             <div id="docs-sections"></div>
             <div class="docs-edit">
-              <span id="docs-edit-prompt">Bir hata mı buldunuz?</span>
-              <a href="https://github.com/boracomet/go-irmik" target="_blank" rel="noreferrer" id="docs-edit-link">GitHub’da düzenle →</a>
+              <span id="docs-edit-prompt">Found a mistake?</span>
+              <a href="https://github.com/boracomet/go-irmik" target="_blank" rel="noreferrer" id="docs-edit-link">Edit on GitHub →</a>
             </div>
           </div>
         </div>
@@ -365,14 +380,14 @@ app.GET("/", home)</pre>
                   <img src="assets/irmik.png" alt="" class="logo-img" />
                 </span>
                 <span class="logo-word">
-                  <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-İrmik</span>
+                  <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-Irmik</span>
                 </span>
               </a>
-              <p class="footer-tagline" data-i18n="footerTagline">Gin tabanlı meta-çatı — ince çekirdek, geniş katalog.</p>
+              <p class="footer-tagline" data-i18n="footerTagline">Gin-based meta-framework — thin core, wide catalog.</p>
             </div>
             <div class="footer-cols">
               <div class="footer-col">
-                <h4 class="footer-col-title" data-i18n="nav.docs">Dokümanlar</h4>
+                <h4 class="footer-col-title" data-i18n="nav.docs">Docs</h4>
                 <ul>
                   <li><button type="button" class="footer-link" data-go="docs">Quick start</button></li>
                   <li><button type="button" class="footer-link" data-go="docs">Rendering modes</button></li>
@@ -381,7 +396,7 @@ app.GET("/", home)</pre>
                 </ul>
               </div>
               <div class="footer-col">
-                <h4 class="footer-col-title" data-i18n="ecosystem">Ekosistem</h4>
+                <h4 class="footer-col-title" data-i18n="ecosystem">Ecosystem</h4>
                 <ul>
                   <li><button type="button" class="footer-link" data-go="docs">irmik/jwt</button></li>
                   <li><button type="button" class="footer-link" data-go="docs">irmik/websocket</button></li>
@@ -401,17 +416,45 @@ app.GET("/", home)</pre>
             </div>
           </div>
           <div class="footer-bottom">
-            <span data-i18n="copyright">© 2026 Go-İrmik. MIT License.</span>
+            <span data-i18n="copyright">© 2026 Go-Irmik. MIT License.</span>
             <span class="footer-made">
               <span class="footer-made-icon">
                 <img src="assets/irmik.png" alt="" />
               </span>
-              <span data-i18n="madeWith">Go-İrmik ile servis edilir</span>
+              <span data-i18n="madeWith">Served with Go-Irmik</span>
             </span>
           </div>
         </div>
       </footer>
     </div>
+
+    <div
+      id="cookie-banner"
+      class="cookie-banner is-hidden"
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="cookie-title"
+      aria-describedby="cookie-body"
+      hidden
+    >
+      <img
+        src="assets/cookiemik.png"
+        alt=""
+        class="cookie-banner-img"
+        width="72"
+        height="72"
+        decoding="async"
+      />
+      <div class="cookie-banner-copy">
+        <p id="cookie-title" class="cookie-banner-title"></p>
+        <p id="cookie-body" class="cookie-banner-text"></p>
+        <div class="cookie-banner-actions">
+          <button type="button" class="btn-primary cookie-btn" id="cookie-accept"></button>
+          <button type="button" class="btn-secondary cookie-btn" id="cookie-decline"></button>
+        </div>
+      </div>
+    </div>
+
     <script src="js/app.js" defer></script>
   </body>
 </html>
