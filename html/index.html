@@ -6,7 +6,7 @@
     <title>Go-Irmik: Fast, innovative web framework for Go</title>
     <meta
       name="description"
-      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
+      content="Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit."
     />
 
     <meta property="og:type" content="website" />
@@ -14,7 +14,7 @@
     <meta property="og:title" content="Go-Irmik: Fast, innovative web framework for Go" />
     <meta
       property="og:description"
-      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
+      content="Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit."
     />
     <!-- Absolute defaults for WhatsApp/Facebook; SITE_URL/PUBLIC_URL can rewrite for other domains. -->
     <meta property="og:image" content="https://goirmik.org/assets/og.png" />
@@ -26,7 +26,7 @@
     <meta name="twitter:title" content="Go-Irmik: Fast, innovative web framework for Go" />
     <meta
       name="twitter:description"
-      content="Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers."
+      content="Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit."
     />
     <meta name="twitter:image" content="https://goirmik.org/assets/og.png" />
 
@@ -141,7 +141,7 @@
               </h1>
 
               <p class="hero-sub" data-i18n="hero.sub">
-                Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers.
+                Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit.
               </p>
 
               <div class="hero-actions">
@@ -221,7 +221,7 @@
         <section id="docs" class="section">
           <div class="section-head reveal">
             <h2 class="section-title" data-i18n="featuresTitle">Core and catalog</h2>
-            <p class="section-sub" data-i18n="featuresSub">Thin core; import the packages you need and wire them in.</p>
+            <p class="section-sub" data-i18n="featuresSub">File routes, render modes, and security-minded admin helpers. Catalog packages stay opt-in and frozen.</p>
           </div>
           <div class="features-grid" id="features-grid"></div>
         </section>
@@ -269,9 +269,9 @@
                 <span class="step-num">2</span>
                 <h3 class="step-title" data-i18n="steps.1.t">Write</h3>
               </div>
-              <p class="step-desc" data-i18n="steps.1.d">Create a router with irmik.New; define a route.</p>
-              <pre class="step-pre">app := irmik.New()
-app.GET("/", home)</pre>
+              <p class="step-desc" data-i18n="steps.1.d">Create an app with irmik.New; register a Gin route.</p>
+              <pre class="step-pre">app, _ := irmik.New(cfg)
+app.Engine.GET("/", home)</pre>
             </article>
             <article class="step-card reveal" style="animation-delay: 160ms">
               <div class="step-head">
@@ -323,7 +323,7 @@ app.GET("/", home)</pre>
             <div class="cta-glow animate-glow"></div>
             <img src="assets/irmik.png" alt="" class="cta-mascot animate-float" />
             <h2 class="cta-title" data-i18n="ctaTitle">Go-Irmik for day-to-day work</h2>
-            <p class="cta-sub" data-i18n="ctaSub">Admin panels, internal tools, SSR sites, and JWT REST APIs.</p>
+            <p class="cta-sub" data-i18n="ctaSub">Admin panels, internal tools, and server-rendered sites.</p>
             <button type="button" class="btn-primary btn-cta" data-go="docs">
               <span data-i18n="ctaBtn">Read the docs</span>
               <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -358,7 +358,7 @@ app.GET("/", home)</pre>
                   <h1 class="docs-banner-title">
                     <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-Irmik</span>
                   </h1>
-                  <p class="docs-banner-sub" id="docs-banner-sub">Gin-based meta-framework: thin core, wide catalog.</p>
+                  <p class="docs-banner-sub" id="docs-banner-sub">Gin meta-framework: file routes, render modes, opt-in admin helpers.</p>
                 </div>
               </div>
             </div>
@@ -383,7 +383,7 @@ app.GET("/", home)</pre>
                   <span class="logo-go">Go</span><span class="logo-rest" data-i18n="logoRest">-Irmik</span>
                 </span>
               </a>
-              <p class="footer-tagline" data-i18n="footerTagline">Gin-based meta-framework: thin core, wide catalog.</p>
+              <p class="footer-tagline" data-i18n="footerTagline">Gin meta-framework: file routes, render modes, opt-in admin helpers.</p>
             </div>
             <div class="footer-cols">
               <div class="footer-col">
@@ -398,10 +398,10 @@ app.GET("/", home)</pre>
               <div class="footer-col">
                 <h4 class="footer-col-title" data-i18n="ecosystem">Ecosystem</h4>
                 <ul>
-                  <li><button type="button" class="footer-link" data-go="docs">irmik/jwt</button></li>
-                  <li><button type="button" class="footer-link" data-go="docs">irmik/websocket</button></li>
+                  <li><button type="button" class="footer-link" data-go="docs">irmik/auth</button></li>
+                  <li><button type="button" class="footer-link" data-go="docs">irmik/ws</button></li>
                   <li><button type="button" class="footer-link" data-go="docs">irmik/cache</button></li>
-                  <li><button type="button" class="footer-link" data-go="docs">irmik/swagger</button></li>
+                  <li><button type="button" class="footer-link" data-go="docs">irmik/admin</button></li>
                 </ul>
               </div>
               <div class="footer-col">

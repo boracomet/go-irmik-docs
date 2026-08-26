@@ -10,7 +10,7 @@ const copy = {
       badge: "{v} · Go 1.25",
       title: "Go için hızlı, yenilikçi",
       titleAccent: "Web çatısı.",
-      sub: "Go-İrmik, Gin üzerine kurulu bir meta-çatı: ince çekirdek, geniş opt-in katalog. Dosya tabanlı rotalar, SSR ve isteğe bağlı sürücüler.",
+      sub: "Go-İrmik, Gin üzerine kurulu bir meta-çatı: dosya tabanlı rotalar, SSR/SSG/ISR ve isteğe bağlı admin yardımcıları. Megakit değil.",
       primary: "Dokümanlar",
       secondary: "GitHub",
       installed: "kuruldu",
@@ -24,28 +24,20 @@ const copy = {
     logoRest: "-İrmik",
     brand: "Go-İrmik",
     featuresTitle: "Çekirdek ve katalog",
-    featuresSub: "İnce çekirdek; ihtiyaç duyduğunuz paketleri import ederek bağlarsınız.",
+    featuresSub: "Dosya rotaları, render modları ve güvenlik odaklı admin yardımcıları. Katalog paketleri opt-in ve dondurulmuş.",
     features: [
       { icon: "·", t: "Gin tabanlı ince çekirdek", d: "irmik.New etrafında meta-çatı. Ağır sürücüler çekirdeğe gömülmez." },
       { icon: "·", t: "Dosya tabanlı rotalar", d: "app/ keşfi sayfaları URL’lere eşler; dinamik parçalar ve layout zinciri." },
-      { icon: "·", t: "SSR / SSG / ISR", d: "Aynı uygulamada sunucu render, statik üretim ve ISR önbellek." },
+      { icon: "·", t: "SSR / SSG / ISR", d: "Aynı uygulamada sunucu render, statik üretim ve ISR. Arka plan revalidate aynı loader yolunu çalıştırır." },
       { icon: "·", t: "HTMX ve React islands", d: "Kısmi HTMX yanıtları; Vite ile hydrate edilen React adacıkları." },
       { icon: "·", t: "Markdown ve SEO", d: "İçerik koleksiyonları, OG/JSON-LD, sitemap ve robots." },
-      { icon: "·", t: "Oturum ve CSRF", d: "Çerez oturumları (bellek/Redis) ve CSRF, isteğe bağlı paketler." },
-      { icon: "·", t: "Güvenlik varsayılanları", d: "Üretimde zayıf JWT sırları reddedilir; fail-closed başlıklar." },
-      { icon: "·", t: "JWT REST API", d: "irmik/api: /api/v1, JWT doğrulama ve sayfalama yardımcıları." },
+      { icon: "·", t: "Oturum ve CSRF", d: "Çerez oturumları (bellek/Redis) ve CSRF, isteğe bağlı admin yardımcıları." },
+      { icon: "·", t: "Güvenlik varsayılanları", d: "Üretimde zayıf JWT sırları reddedilir; fail-closed başlıklar. Router 500 yanıtı genel kalır." },
       { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD şablonları ve listeler için examples/admin." },
       { icon: "·", t: "Auth ve RBAC", d: "JWT/şifre akışları, roller, Can kontrolleri, Gin guard’ları." },
-      { icon: "·", t: "SQL ve GORM", d: "database/sql, migrate, isteğe bağlı GORM; sqlite/postgres/mysql." },
-      { icon: "·", t: "SSE ve WebSocket", d: "irmik/sse ve irmik/ws hub’ları." },
-      { icon: "·", t: "Opt-in katalog", d: "jwt, rbac, paginate, cache, openapi, upload, queue, mail; ihtiyaç oldukça import edin." },
-      { icon: "·", t: "Lean linking", d: "Import etmediğiniz Redis, S3, OTel veya GORM ikiliye girmez." },
-      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build: iskelet, HMR, tanılama." },
-      { icon: "·", t: "Upload ve depolama", d: "Yerel depolama, S3 opt-in, MIME sınırlı yükleme." },
-      { icon: "·", t: "Kuyruk ve zamanlayıcı", d: "Bellek kuyruğu, Asynq/Redis opt-in, cron." },
-      { icon: "·", t: "Formlar ve doğrulama", d: "Form bağlama, CSRF alanı, go-playground/validator." },
-      { icon: "·", t: "OpenAPI / Swagger", d: "OpenAPI belgesi ve CDN üzerinden Swagger UI." },
-      { icon: "·", t: "Admin örnek yolu", d: "examples/admin: oturum + HTMX UI + JWT API." },
+      { icon: "·", t: "SSE ve WebSocket", d: "Opt-in irmik/sse ve irmik/ws. SSE yazma deadline’ını temizler; ~30s WriteTimeout akışı kesmez." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build. irmik new, go-irmik v0.1.1 pinler; kardeş replace yok." },
+      { icon: "·", t: "Import ile linking", d: "Import etmediğiniz katalog paketi ikiliye girmez. go get yine de modülden AWS, GORM ve OTel indirir." },
     ],
     codeTitle: "Idiomatik Go API",
     codeSub: "Gin benzeri yönlendirici; az soyutlama, net yüzey.",
@@ -53,11 +45,11 @@ const copy = {
     startTitle: "Hızlı başlangıç",
     steps: [
       { t: "Kur", d: "Modüle ekleyin: go get github.com/boracomet/go-irmik" },
-      { t: "Yaz", d: "irmik.New ile yönlendirici oluşturun; rotayı tanımlayın." },
+      { t: "Yaz", d: "irmik.New ile uygulama oluşturun; Gin rotası kaydedin." },
       { t: "Çalıştır", d: "go run main.go, varsayılan :8080" },
     ],
     ctaTitle: "Gündelik iş için Go-İrmik",
-    ctaSub: "Admin panelleri, dahili araçlar, SSR siteler ve JWT REST API.",
+    ctaSub: "Admin panelleri, dahili araçlar ve sunucu tarafı render siteler.",
     ctaBtn: "Dokümanları oku",
     showcaseTitle: "İrmik kullanan projeler",
     showcaseSub: "İlk örnek: bu doküman sitesi. Diğerleri eklendikçe burada listelenecek.",
@@ -66,7 +58,7 @@ const copy = {
     projectDesc: "İki dilli doküman sitesi; sürüm ve GitHub yıldız sayısı canlı çekilir. İrmik ile servis edilir.",
     projectCta: "Proje ekle →",
     ecosystem: "Ekosistem",
-    footerTagline: "Gin tabanlı meta-çatı: ince çekirdek, geniş katalog.",
+    footerTagline: "Gin meta-çatısı: dosya rotaları, render modları, isteğe bağlı admin yardımcıları.",
     madeWith: "Bu websitesi İrmik ile build edildi",
     copyright: "© 2026 Go-İrmik. MIT License.",
     sidebar: "Başlarken",
@@ -86,7 +78,7 @@ const copy = {
       badge: "{v} · Go 1.25",
       title: "Fast, innovative",
       titleAccent: "web framework for Go.",
-      sub: "Go-Irmik is a Gin-based meta-framework: thin core, wide opt-in catalog. File routes, SSR, and optional drivers.",
+      sub: "Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit.",
       primary: "Docs",
       secondary: "GitHub",
       installed: "installed",
@@ -100,28 +92,20 @@ const copy = {
     logoRest: "-Irmik",
     brand: "Go-Irmik",
     featuresTitle: "Core and catalog",
-    featuresSub: "Thin core; import the packages you need and wire them in.",
+    featuresSub: "File routes, render modes, and security-minded admin helpers. Catalog packages stay opt-in and frozen.",
     features: [
       { icon: "·", t: "Gin-based thin core", d: "Meta-framework around irmik.New. Heavy drivers stay out of the core." },
       { icon: "·", t: "File-based routes", d: "app/ discovery maps pages to URLs, including dynamic segments and layouts." },
-      { icon: "·", t: "SSR / SSG / ISR", d: "Server render, static generation, and ISR cache in the same app." },
+      { icon: "·", t: "SSR / SSG / ISR", d: "Server render, static generation, and ISR cache in the same app. Background revalidate runs the same loader path." },
       { icon: "·", t: "HTMX and React islands", d: "Partial HTMX responses; Vite-hydrated React islands." },
       { icon: "·", t: "Markdown and SEO", d: "Content collections, OG/JSON-LD, sitemap, and robots." },
-      { icon: "·", t: "Sessions and CSRF", d: "Cookie sessions (memory/Redis) and CSRF as opt-in packages." },
-      { icon: "·", t: "Security defaults", d: "Weak JWT secrets rejected in production; fail-closed headers." },
-      { icon: "·", t: "JWT REST API", d: "irmik/api: /api/v1, JWT auth, and pagination helpers." },
+      { icon: "·", t: "Sessions and CSRF", d: "Cookie sessions (memory/Redis) and CSRF as opt-in admin helpers." },
+      { icon: "·", t: "Security defaults", d: "Weak JWT secrets rejected in production; fail-closed headers. Router 500s return a generic body." },
       { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD templates, and lists; see examples/admin." },
       { icon: "·", t: "Auth and RBAC", d: "JWT/password flows, roles, Can checks, Gin guards." },
-      { icon: "·", t: "SQL and GORM", d: "database/sql, migrate, optional GORM; sqlite/postgres/mysql." },
-      { icon: "·", t: "SSE and WebSocket", d: "irmik/sse and irmik/ws hubs." },
-      { icon: "·", t: "Opt-in catalog", d: "jwt, rbac, paginate, cache, openapi, upload, queue, mail; import as needed." },
-      { icon: "·", t: "Lean linking", d: "Redis, S3, OTel, or GORM you don’t import never enter the binary." },
-      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build: scaffold, HMR, diagnostics." },
-      { icon: "·", t: "Upload and storage", d: "Local storage, opt-in S3, MIME-limited uploads." },
-      { icon: "·", t: "Queue and scheduler", d: "In-memory queue, Asynq/Redis opt-in, cron." },
-      { icon: "·", t: "Forms and validation", d: "Form binding, CSRF field, go-playground/validator." },
-      { icon: "·", t: "OpenAPI / Swagger", d: "OpenAPI docs and Swagger UI via CDN." },
-      { icon: "·", t: "Admin example path", d: "examples/admin: sessions + HTMX UI + JWT API." },
+      { icon: "·", t: "SSE and WebSocket", d: "Opt-in irmik/sse and irmik/ws. SSE clears the write deadline so WriteTimeout (~30s) does not kill streams." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build: scaffold, HMR, diagnostics. irmik new pins go-irmik v0.1.1." },
+      { icon: "·", t: "Import-opt-in linking", d: "Unused catalog packages stay out of the binary if you do not import them. go get still downloads AWS, GORM, and OTel from the module." },
     ],
     codeTitle: "Idiomatic Go API",
     codeSub: "Gin-like router; little abstraction, clear surface.",
@@ -129,11 +113,11 @@ const copy = {
     startTitle: "Quick start",
     steps: [
       { t: "Install", d: "Add to your module: go get github.com/boracomet/go-irmik" },
-      { t: "Write", d: "Create a router with irmik.New; define a route." },
+      { t: "Write", d: "Create an app with irmik.New; register a Gin route." },
       { t: "Run", d: "go run main.go, default :8080" },
     ],
     ctaTitle: "Go-Irmik for day-to-day work",
-    ctaSub: "Admin panels, internal tools, SSR sites, and JWT REST APIs.",
+    ctaSub: "Admin panels, internal tools, and server-rendered sites.",
     ctaBtn: "Read the docs",
     showcaseTitle: "Projects using Irmik",
     showcaseSub: "First example: this docs site. Others will be listed here as they appear.",
@@ -142,7 +126,7 @@ const copy = {
     projectDesc: "Bilingual docs site; release tag and star count fetched live. Served with Irmik.",
     projectCta: "Add a project →",
     ecosystem: "Ecosystem",
-    footerTagline: "Gin-based meta-framework: thin core, wide catalog.",
+    footerTagline: "Gin meta-framework: file routes, render modes, opt-in admin helpers.",
     madeWith: "This website is built with Irmik",
     copyright: "© 2026 Go-Irmik. MIT License.",
     sidebar: "Getting Started",
@@ -166,47 +150,61 @@ function getSamples(l) {
   return {
     basic: `package main
 
-import "github.com/boracomet/go-irmik"
+import (
+    "context"
+
+    "github.com/gin-gonic/gin"
+    "github.com/boracomet/go-irmik/irmik"
+    "github.com/boracomet/go-irmik/irmik/config"
+)
 
 func main() {
-    app := irmik.New()
+    cfg := config.Default()
+    app, err := irmik.New(cfg)
+    if err != nil {
+        panic(err)
+    }
 
-    app.GET("/", func(c *irmik.Ctx) error {
-        return c.JSON(irmik.Map{
+    app.Engine.GET("/", func(c *gin.Context) {
+        c.JSON(200, gin.H{
             "message": "${hi}",
         })
     })
 
-    app.Listen(":8080")
+    _ = app.Run(context.Background())
 }`,
-    routing: `app := irmik.New()
+    routing: `cfg := config.Default()
+app, err := irmik.New(cfg)
+if err != nil {
+    panic(err)
+}
 
-// Path params & wildcards
-app.GET("/users/:id", getUser)
-app.GET("/files/*path", serveFile)
+// Path params (Gin)
+app.Engine.GET("/users/:id", getUser)
+app.Engine.GET("/files/*path", serveFile)
 
 // Route groups
-api := app.Group("/api/v1")
+api := app.Engine.Group("/api/v1")
 api.GET("/posts", listPosts)
 api.POST("/posts", createPost)
 api.DELETE("/posts/:id", deletePost)
 
-app.Listen(":8080")`,
-    middleware: `app := irmik.New()
+_ = app.Run(context.Background())`,
+    middleware: `cfg := config.Default()
+app, err := irmik.New(cfg)
+if err != nil {
+    panic(err)
+}
 
-// Global middleware chain
-app.Use(
-    irmik.Logger(),
-    irmik.Recover(),
-    irmik.CORS(),
-    irmik.RateLimit(100),
-)
+// Recovery, request id, security headers: on by default
+app.EnableSecureDefaults()
 
-// Per-group auth
-admin := app.Group("/admin", AuthRequired)
+// Per-group auth (your middleware)
+admin := app.Engine.Group("/admin")
+admin.Use(requireSession)
 admin.GET("/stats", dashboard)
 
-app.Listen(":8080")`,
+_ = app.Run(context.Background())`,
   };
 }
 
@@ -286,7 +284,7 @@ function highlightHome(code) {
         .replace(/(".*?")/g, '<span class="tok-str">$1</span>')
         .replace(/(\/\/.*)$/g, '<span class="tok-com">$1</span>')
         .replace(keywords, '<span class="tok-kw">$1</span>')
-        .replace(/\b(GET|POST|DELETE|PUT|Use|Group|Listen|JSON|New)\b/g, '<span class="tok-fn">$1</span>');
+        .replace(/\b(GET|POST|DELETE|PUT|Use|Group|JSON|New|Run|Engine|Default|EnableSecureDefaults)\b/g, '<span class="tok-fn">$1</span>');
       return `<div class="code-row"><span class="code-ln">${i + 1}</span><span class="code-line">${html || " "}</span></div>`;
     })
     .join("");
@@ -301,7 +299,7 @@ function highlightDocs(code) {
         .replace(/(".*?"|`.*?`)/g, '<span class="tok-str">$1</span>')
         .replace(/(#.*|\/\/.*)$/g, '<span class="tok-com">$1</span>')
         .replace(kw, '<span class="tok-kw">$1</span>')
-        .replace(/\b(GET|POST|PUT|DELETE|Use|Group|Listen|JSON|New|Render|Bind)\b/g, '<span class="tok-fn">$1</span>');
+        .replace(/\b(GET|POST|PUT|DELETE|Use|Group|JSON|New|Run|Engine|Render|Bind)\b/g, '<span class="tok-fn">$1</span>');
       return `<div class="docs-code-line">${html || " "}</div>`;
     })
     .join("");
@@ -365,42 +363,57 @@ const sections = [
       badges() +
       p(
         l === "tr"
-          ? `${strong("İrmik")}, Go için Gin tabanlı bir meta-çatı: ${strong("ince çekirdek")} ve ${strong("geniş opt-in katalog")}. Admin / dahili sistemler ve SSR siteler için; dosya tabanlı rotalar, sunucu render ve isteğe bağlı sürücüler sunar, her ikiliye gömülü bir megakit değildir.`
-          : `${strong("Irmik")} is a Gin-based meta-framework for Go: a ${strong("thin core")} and a ${strong("wide opt-in catalog")}. It is aimed at admin / internal systems and SSR sites that want file routes, server rendering, and optional drivers, not a megakit in every binary.`,
+          ? `${strong("İrmik")}, Go için Gin tabanlı bir meta-çatı. ${strong("Çekirdek sözü")}: dosya tabanlı ${inline("app/")} rotaları, SSR/SSG/ISR render modları ve güvenlik odaklı admin yardımcıları (isteğe bağlı oturum/CSRF/RBAC/HTMX). Megakit değil.`
+          : `${strong("Irmik")} is a Gin-based meta-framework for Go. ${strong("Core promise:")} file-based ${inline("app/")} routes, SSR/SSG/ISR render modes, and security-minded admin helpers (opt-in session/CSRF/RBAC/HTMX). Not a megakit.`,
       ) +
       p(
         l === "tr"
-          ? `Birincil ürün yolu: ${inline("examples/admin")}; oturum + HTMX yönetim arayüzü ve ${inline("irmik/paginate")}, ${inline("irmik/rbac")} ile JWT API. SPA istemcileriyle de kullanılabilir.`
-          : `Primary product path: ${inline("examples/admin")}; session + HTMX admin UI and a JWT API with ${inline("irmik/paginate")} and ${inline("irmik/rbac")}. Usable with SPA clients as well.`,
+          ? `Admin / dahili araçlar ve sunucu render siteler için. Birincil örnek yol: ${inline("examples/admin")} (oturum + HTMX arayüz + JSON API). SPA istemcileriyle de kullanılabilir.`
+          : `For admin / internal tools and server-rendered sites. Primary example path: ${inline("examples/admin")} (session + HTMX UI + JSON API). Usable with SPA clients as well.`,
       ),
   },
   {
     id: "whats-new",
-    title: { tr: "v0.1.1'de neler var", en: "What's new in v0.1.1" },
+    title: { tr: "main'de neler var", en: "What's new on main" },
     body: (l) =>
       p(
         l === "tr"
-          ? `Duyarlı görseller ve bir geliştirme overlay’i. Üretim davranışı aynı kalır: overlay ${inline("development")} dışında monte edilmez.`
-          : `Responsive images and a development overlay. Production behavior is unchanged: the overlay is not mounted outside ${inline("development")}.`,
+          ? `Wave 1 doğruluk geçişi ${inline("go-irmik")} ${inline("main")} üzerinde, ${inline("v0.1.1")} etiketinden sonra. Katalog donduruldu; yeni paket yok.`
+          : `Wave 1 correctness landed on ${inline("go-irmik")} ${inline("main")} after the ${inline("v0.1.1")} tag. The catalog is frozen; no new packages.`,
       ) +
       ul(
         l === "tr"
           ? [
-              `${strong("irmik/imagex pipeline")}: opt-in ${inline("Pipeline")}, ${inline("/_irmik/img")} üzerinden servis eder; ${inline("{{ img }}")} yardımcısı ${inline("srcset")} üretir (375 / 768 / 1440, WebP). Yalnızca yerel dosyalar; uzak URL’ler ve rasgele genişlikler reddedilir. Hero görsellerinde ${inline("priority")} ile lazy-load kapatılabilir.`,
-              `${strong("Upload variants")}: ${inline("Variants")} / ${inline("WriteVariants")} kayıt anında izinli genişlikleri encode eder (${inline("name-375.webp")}, ${inline("name-1440.webp")}); admin medya için.`,
-              `${strong("Dev overlay")}: geliştirmede HTML sayfalarına sol altta İrmik rozeti eklenir. Panel şablon ve pencere hatalarını, dosya rotalarını ve dinleme adresini listeler. ${inline("irmik dev")}, ${inline("app/")} veya ${inline("templates/")} kaydından sonra tarayıcıyı yeniler. Island derleme hataları Vite overlay’de kalır.`,
-              `Dokümanlar: katalog, mimari ve changelog güncellendi.`,
+              `${strong("ISR revalidate")}: arka plan yenileme, istekle aynı loader yolunu çalıştırır (ayrılmış ${inline("gin.Context")} üzerinde klonlanmış GET). Kullanıcıya özel ISR yok; loader’lar canlı ${inline("ResponseWriter")}’a bağlanmamalı.`,
+              `${strong("SSE")}: bağlantı yazma deadline’ını temizler; sunucu ${inline("WriteTimeout")} (~30s) akışı kesmez. ${inline("IdleTimeout")} varsayılanı 60s.`,
+              `${strong("Router 500")}: gövde genel ${inline("internal server error")}; ayrıntılar istek kimliğiyle loglanır.`,
+              `${inline("irmik new")}: ${inline("github.com/boracomet/go-irmik v0.1.1")} pinler, kardeş ${inline("replace")} yok, ${inline("GET /health")} iki kez kaydedilmez.`,
+              `${strong("JWT refresh")}: ${inline("RefreshStore")} arayüzü. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC — çok kopyalı değil. Bellek içi rotasyonu üretim JWT’si olarak öğretmeyin.`,
+              `${strong("OAuth")}: ${inline("GitHubProvider")} / ${inline("GoogleProvider")} artık ${inline("GitHubStub")} / ${inline("GoogleStub")}. ${inline("Exchange")} her zaman ${inline("ErrOAuthNotImplemented")} döner. Sahte GitHub/Google istemcisi yok.`,
+              `${inline("Context.MustUser")}: kullanıcı yoksa panic (sıfır değer yerine; kırıcı).`,
+              `${inline("cache.New")}: bilinmeyen sürücüde hata döner.`,
+              `${strong("Linking")}: ikiliye girmek import ile opt-in. ${inline("go get")} yine de modülden AWS/GORM/OTel indirir.`,
             ]
           : [
-              `${strong("irmik/imagex pipeline")}: opt-in ${inline("Pipeline")} serves ${inline("/_irmik/img")} and an ${inline("{{ img }}")} helper that emits ${inline("srcset")} (375 / 768 / 1440, WebP). Local files only; remote URLs and arbitrary widths are rejected. Hero images can set ${inline("priority")} so they are not lazy-loaded.`,
-              `${strong("Upload variants")}: ${inline("Variants")} / ${inline("WriteVariants")} encode allowlisted widths at save time (${inline("name-375.webp")}, ${inline("name-1440.webp")}) for admin media.`,
-              `${strong("Dev overlay")}: in development, HTML pages get a bottom-left Irmik badge. The panel lists template and window errors, file routes, and listen address. ${inline("irmik dev")} reloads the browser after ${inline("app/")} or ${inline("templates/")} saves. Island compile errors stay in the Vite overlay.`,
-              `Docs: catalog, architecture, and changelog updates.`,
+              `${strong("ISR revalidate")} runs the same loader path as the request (cloned GET on a detached ${inline("gin.Context")}). Per-user ISR is unsupported; loaders must not depend on the live ${inline("ResponseWriter")}.`,
+              `${strong("SSE")} clears the write deadline so Server ${inline("WriteTimeout")} (~30s) does not kill streams. ${inline("IdleTimeout")} default is 60s.`,
+              `Router ${strong("500s")} return a generic ${inline("internal server error")} body; details are logged with request id.`,
+              `${inline("irmik new")} pins ${inline("github.com/boracomet/go-irmik v0.1.1")}, no sibling ${inline("replace")}, and does not double-register ${inline("GET /health")}.`,
+              `${strong("JWT refresh")}: ${inline("RefreshStore")} interface. Default ${inline("MemoryRefreshStore")} is process-local with TTL/GC — not multi-replica. Do not treat in-memory rotation as production JWT.`,
+              `${strong("OAuth")}: ${inline("GitHubProvider")} / ${inline("GoogleProvider")} renamed to ${inline("GitHubStub")} / ${inline("GoogleStub")}. ${inline("Exchange")} always returns ${inline("ErrOAuthNotImplemented")}. No fake GitHub/Google client.`,
+              `${inline("Context.MustUser")} panics if no user is present (breaking vs a zero-value user).`,
+              `${inline("cache.New")} errors on unknown drivers.`,
+              `${strong("Linking")}: binary linking is opt-in via import. ${inline("go get")} still downloads AWS/GORM/OTel from the module.`,
             ],
       ) +
+      p(
+        l === "tr"
+          ? `${inline("v0.1.1")} etiketi hâlâ imagex + geliştirme overlay’i (overlay ${inline("development")} dışında monte edilmez).`
+          : `The ${inline("v0.1.1")} tag remains imagex + the development overlay (the overlay is not mounted outside ${inline("development")}).`,
+      ) +
       codeBlock(
-        `go get github.com/boracomet/go-irmik@v0.1.1
-go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
+        `go get github.com/boracomet/go-irmik@main
+go install github.com/boracomet/go-irmik/cmd/irmik@main`,
         "terminal",
       ),
   },
@@ -413,12 +426,12 @@ go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
           ? [
               "Gin bilen, üstüne yapı ve keşfedilebilirlik isteyen Go ekipleri.",
               "Admin panelleri, dahili araçlar ve SSR ağırlıklı ürünler kuranlar.",
-              "Bağımlılıkları ihtiyaç oldukça ekleyen, yalın ikili dosya sevenler.",
+              "Bağımlılığı import ile ekleyenler — ve go get’in modül grafiğini indirdiğini bilenler.",
             ]
           : [
               "Go teams who know Gin and want structure and discoverability on top.",
               "Builders of admin panels, internal tools and SSR-heavy products.",
-              "People who like lean binaries and add dependencies only when needed.",
+              "People who opt in via import — and know go get still fetches the module graph.",
             ],
       ),
   },
@@ -446,18 +459,18 @@ go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
     body: (l) =>
       p(
         l === "tr"
-          ? 'İrmik "ince çekirdek + geniş katalog" modelini kullanır. Çekirdek küçük kalır; auth, cache, WebSocket gibi yetenekleri yalnızca ihtiyaç duydukça bağlarsınız.'
-          : 'Irmik uses a "thin core + wide catalog" model. The core stays small; you link auth, cache, WebSocket, and similar only when you need them.',
+          ? "İrmik çekirdeği dosya rotaları, render modları ve güvenlik odaklı admin yardımcılarıdır. Auth, cache, WebSocket gibi katalog paketlerini yalnızca ihtiyaç duydukça import edersiniz."
+          : "Irmik’s core is file routes, render modes, and security-minded admin helpers. You import catalog packages such as auth, cache, or WebSocket only when you need them.",
       ) +
       ul(
         l === "tr"
           ? [
-              `${strong("Lean linking:")} Kullanmadığın sürücü ikiliye girmez.`,
+              `${strong("Import ile linking:")} Kullanmadığın paket ikiliye girmez. ${inline("go get")} yine de AWS/GORM/OTel indirir.`,
               `${strong("Keşfedilebilir:")} ${inline("irmik")} CLI ile rotaları ve modülleri listele.`,
               `${strong("Güvenli varsayılanlar:")} Üretimde zayıf sırlar reddedilir.`,
             ]
           : [
-              `${strong("Lean linking:")} a driver you don't use never enters the binary.`,
+              `${strong("Import-opt-in linking:")} a package you don't import never enters the binary. ${inline("go get")} still downloads AWS/GORM/OTel.`,
               `${strong("Discoverable:")} list routes and modules with the ${inline("irmik")} CLI.`,
               `${strong("Safe defaults:")} weak secrets are rejected in production.`,
             ],
@@ -470,9 +483,9 @@ go install github.com/boracomet/go-irmik/cmd/irmik@v0.1.1`,
       p(l === "tr" ? "Üç adımda çalışan bir sunucu:" : "A running server in three steps:") +
       codeBlock(
         `# 1: ${l === "tr" ? "kur" : "install"}
-go get github.com/boracomet/go-irmik
+go install github.com/boracomet/go-irmik/cmd/irmik@main
 
-# 2: ${l === "tr" ? "yeni proje" : "new project"}
+# 2: ${l === "tr" ? "yeni proje (v0.1.1 pin; kardeş replace yok)" : "new project (pins v0.1.1; no sibling replace)"}
 irmik new my-app && cd my-app
 
 # 3: ${l === "tr" ? "çalıştır" : "run"}
@@ -482,18 +495,34 @@ irmik dev   # http://localhost:8080`,
       codeBlock(
         `package main
 
-import "github.com/boracomet/go-irmik"
+import (
+    "context"
+
+    "github.com/gin-gonic/gin"
+    "github.com/boracomet/go-irmik/irmik"
+    "github.com/boracomet/go-irmik/irmik/config"
+)
 
 func main() {
-    app := irmik.New()
-
-    app.GET("/", func(c *irmik.Ctx) error {
-        return c.JSON(irmik.Map{"message": "${helloMessage(l)}"})
+    cfg := config.Default()
+    app, err := irmik.New(cfg)
+    if err != nil {
+        panic(err)
+    }
+    app.EnableSecureDefaults()
+    app.Engine.GET("/", func(c *gin.Context) {
+        c.String(200, "${helloMessage(l)}")
     })
-
-    app.Listen(":8080")
+    if err := app.Run(context.Background()); err != nil {
+        panic(err)
+    }
 }`,
         "main.go",
+      ) +
+      callout(
+        l === "tr"
+          ? `${inline("irmik new")} ${inline("GET /health")} rotasını iki kez kaydetmez. ${inline("go get github.com/boracomet/go-irmik")} ikiliye girmeyen AWS/GORM/OTel bağımlılıklarını yine de indirir.`
+          : `${inline("irmik new")} does not double-register ${inline("GET /health")}. ${inline("go get github.com/boracomet/go-irmik")} still downloads AWS/GORM/OTel even when they do not enter your binary.`,
       ),
   },
   {
@@ -520,14 +549,16 @@ func main() {
               `${strong("HTMX / islands")}: partials and Vite-hydrated islands.`,
             ],
       ) +
+      p(
+        l === "tr"
+          ? `ISR arka plan revalidate, istekle aynı loader yolunu çalıştırır: yol, sorgu, başlıklar ve params ayrılmış bir ${inline("gin.Context")} üzerine klonlanır. Kullanıcıya özel ISR desteklenmez. Loader’lar canlı ${inline("ResponseWriter")}’a veya oturum/auth anahtarlarına bağımlı olmamalı; eksik anahtarlar anonim sayılır.`
+          : `ISR background revalidate runs the same loader path as the request: path, query, headers, and params are cloned onto a detached ${inline("gin.Context")}. Per-user ISR is unsupported. Loaders must not depend on the live ${inline("ResponseWriter")} or on session/auth keys; missing keys are treated as anonymous.`,
+      ) +
       codeBlock(
-        `app.GET("/dashboard", func(c *irmik.Ctx) error {
-    return c.Render("dashboard", irmik.Map{
-        "mode": "ssr",
-        "user": c.User(),
-    })
-})`,
-        "routes/index.go",
+        `# app/dashboard/_meta.yaml
+mode: isr
+revalidate: 60s`,
+        "app/dashboard/_meta.yaml",
       ),
   },
   {
@@ -536,17 +567,18 @@ func main() {
     body: (l) =>
       p(
         l === "tr"
-          ? `${inline("routes/")} klasörünüzdeki dosyalar otomatik olarak URL'lere eşlenir. Dinamik parçalar için köşeli parantez kullanılır.`
-          : `Files in your ${inline("routes/")} folder map to URLs automatically. Use brackets for dynamic segments.`,
+          ? `${inline("app/")} altındaki dosyalar URL’lere eşlenir. Dinamik parçalar için köşeli parantez kullanılır.`
+          : `Files under ${inline("app/")} map to URLs. Use brackets for dynamic segments.`,
       ) +
-      codeBlock(`routes/
-├── index.go          →  /
-├── about.go          →  /about
-├── posts/
-│   ├── index.go      →  /posts
-│   └── [id].go       →  /posts/:id
-└── admin/
-    └── [...path].go  →  /admin/*path`),
+      codeBlock(`app/
+├── page.html              →  /
+├── layout.html
+├── about/
+│   └── page.html          →  /about
+└── blog/
+    ├── page.html          →  /blog
+    └── [slug]/
+        └── page.html      →  /blog/:slug`),
   },
   {
     id: "security",
@@ -554,22 +586,26 @@ func main() {
     body: (l) =>
       p(
         l === "tr"
-          ? "Güvenlik varsayılan olarak açıktır. Üretim uygulamaları boş veya bilinen demo JWT sırlarını dinlemeden önce reddeder."
-          : "Security is on by default. Production apps reject empty and known demo JWT secrets before they listen.",
+          ? "Güvenlik varsayılan olarak açıktır. Üretim uygulamaları boş, bilinen demo ve 32 karakterden kısa JWT sırlarını dinlemeden önce reddeder."
+          : "Security is on by default. Production apps reject empty, known demo, and shorter-than-32-character JWT secrets before they listen.",
       ) +
       ul(
         l === "tr"
           ? [
               `JWT erişim jetonları bir ${inline("jti")} içerir.`,
-              "Dönen (rotating) refresh jetonları ve kullanıcı bazlı iptal desteği.",
+              `${inline("RefreshStore")} ile yenileme/iptal. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC’dir; kopyalar arası paylaşılmaz. Bellek içi rotasyonu üretim JWT’si sanmayın.`,
               'WebSocket, CORS, proxy ve upload varsayılanları "fail-closed" çalışır.',
               `${inline("MiddlewareJWT")} geçersiz bir jetonu yetkisiz sayar.`,
+              `Router 500 yanıtı genel ${inline("internal server error")} gövdesidir; ayrıntılar istek kimliğiyle loglanır.`,
+              `${inline("Context.MustUser")} kullanıcı yoksa panic eder; anonim istekte ${inline("User()")} kullanın.`,
             ]
           : [
               `JWT access tokens include a ${inline("jti")}.`,
-              "Rotating refresh tokens and user-level revocation support.",
+              `Refresh/revoke uses a ${inline("RefreshStore")}. Default ${inline("MemoryRefreshStore")} is process-local TTL/GC, not shared across replicas. Do not treat in-memory rotation as production JWT.`,
               "WebSocket, CORS, proxy and upload defaults fail closed.",
               `${inline("MiddlewareJWT")} treats a present invalid token as unauthorized.`,
+              `Router 500s return a generic ${inline("internal server error")} body; details are logged with request id.`,
+              `${inline("Context.MustUser")} panics if no user is present; use ${inline("User()")} when the request may be anonymous.`,
             ],
       ) +
       callout(
@@ -585,15 +621,19 @@ func main() {
     body: (l) =>
       p(
         l === "tr"
-          ? `Gerçek zamanlı özellikler için ${inline("irmik/websocket")} ve Server-Sent Events yerleşik olarak gelir.`
-          : `For real-time features, ${inline("irmik/websocket")} and Server-Sent Events come built in.`,
+          ? `Gerçek zamanlı özellikler opt-in paketlerdir: ${inline("irmik/sse")} ve ${inline("irmik/ws")}. ${inline("irmik.New")} bunları otomatik monte etmez.`
+          : `Realtime is opt-in: ${inline("irmik/sse")} and ${inline("irmik/ws")}. ${inline("irmik.New")} does not auto-mount them.`,
       ) +
-      codeBlock(`app.WS("/live", func(c *irmik.Socket) error {
-    for msg := range c.Recv() {
-        c.Broadcast("room", msg)
-    }
-    return nil
-})`),
+      p(
+        l === "tr"
+          ? `${inline("http.Server.WriteTimeout")} varsayılanı ~30s. SSE, bağlantının yazma deadline’ını temizler; bu süre açık akışı kesmemeli. ${inline("IdleTimeout")} varsayılanı 60s (keep-alive; aktif SSE yazımını sınırlamaz).`
+          : `Default ${inline("http.Server.WriteTimeout")} is ~30s. SSE clears the per-connection write deadline so that timeout should not kill an open stream. ${inline("IdleTimeout")} defaults to 60s (keep-alive; it does not bound an active SSE write).`,
+      ) +
+      codeBlock(`app.Engine.GET("/events", sse.Handler(sse.Options{
+    Heartbeat: 15 * time.Second,
+}, func(s *sse.Stream) error {
+    return s.Event("hello", gin.H{"ok": true})
+}))`),
   },
   {
     id: "cli",
@@ -605,10 +645,10 @@ func main() {
           : "The irmik CLI provides project scaffolding, a dev server and diagnostics.",
       ) +
       codeBlock(
-        `irmik new my-app     # ${l === "tr" ? "yeni başlangıç projesi" : "new starter project"}
+        `irmik new my-app     # ${l === "tr" ? "v0.1.1 pin; kardeş replace yok" : "pins v0.1.1; no sibling replace"}
 irmik dev            # ${l === "tr" ? "sıcak yeniden yükleme" : "hot reload"}
 irmik routes         # ${l === "tr" ? "tüm rotaları listele" : "list every route"}
-irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
+irmik build          # ${l === "tr" ? "üretim ikilisi / SSG" : "production binary / SSG"}`,
         "terminal",
       ),
   },
@@ -618,16 +658,16 @@ irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
     body: (l) =>
       p(
         l === "tr"
-          ? "İhtiyaç duydukça ekleyin; kullanmadığınız modül ikiliye girmez."
-          : "Add what you need; a module you do not use never enters the binary.",
+          ? `İhtiyaç duydukça import edin. Katalog ${strong("dondurulmuş")}: ince sarmalayıcılar yeni ürün gibi sunulmaz. Import etmediğiniz paket ikiliye girmez; ${inline("go get")} yine de modül grafiğini (AWS, GORM, OTel) indirir.`
+          : `Import what you need. The catalog is ${strong("frozen")}: thin wrappers are not advertised as new product. A package you do not import never enters the binary; ${inline("go get")} still downloads the module graph (AWS, GORM, OTel).`,
       ) +
       catalogGrid([
-        ["irmik/auth", l === "tr" ? "JWT / oturum yardımcıları" : "JWT / session helpers"],
+        ["irmik/auth", l === "tr" ? "JWT / oturum yardımcıları (OAuth istemcisi değil)" : "JWT / session helpers (not an OAuth client)"],
         ["irmik/rbac", l === "tr" ? "Rol tabanlı erişim" : "Role-based access"],
         ["irmik/paginate", l === "tr" ? "Sayfalama yardımcıları" : "Pagination helpers"],
         ["irmik/sse · ws", "SSE & WebSocket"],
-        ["irmik/cache", l === "tr" ? "Önbellek sürücüleri" : "Cache drivers"],
-        ["irmik/openapi", l === "tr" ? "OpenAPI / Swagger" : "OpenAPI / Swagger"],
+        ["irmik/cache", l === "tr" ? "Önbellek; cache.New bilinmeyen sürücüde hata verir" : "Cache; cache.New errors on unknown drivers"],
+        ["irmik/openapi", l === "tr" ? "Deneysel OpenAPI (Swagger UI CDN)" : "Experimental OpenAPI (Swagger UI via CDN)"],
         ["irmik/db · gormx", l === "tr" ? "SQL + isteğe bağlı GORM" : "SQL + optional GORM"],
         ["irmik/admin · htmx", l === "tr" ? "Admin UI yardımcıları" : "Admin UI helpers"],
       ]),
@@ -638,8 +678,8 @@ irmik build          # ${l === "tr" ? "üretim ikilisi" : "production binary"}`,
     body: (l) =>
       p(
         l === "tr"
-          ? `Güncel etiket ${inline("v0.1.1")} (imagex + dev overlay). İlk etiketlenmiş temel ${inline("v0.1.0")} idi. CI, ${inline("main")} üzerinde yarış (race) testleri, linting ve güvenlik açığı taramaları çalıştırır. API 1.0'a kadar değişebilir.`
-          : `Current tag is ${inline("v0.1.1")} (imagex + dev overlay). The first tagged baseline was ${inline("v0.1.0")}. CI runs race tests, linting and vulnerability checks on ${inline("main")}. The API may change until 1.0.`,
+          ? `Güncel etiket ${inline("v0.1.1")} (imagex + dev overlay). Wave 1 doğruluk ${inline("main")} üzerinde. Katalog dondurulmuş. CI, ${inline("main")} üzerinde yarış (race) testleri, linting ve güvenlik açığı taramaları çalıştırır. API 1.0'a kadar değişebilir.`
+          : `Current tag is ${inline("v0.1.1")} (imagex + dev overlay). Wave 1 correctness is on ${inline("main")}. The catalog is frozen. CI runs race tests, linting and vulnerability checks on ${inline("main")}. The API may change until 1.0.`,
       ),
   },
   {
@@ -945,8 +985,8 @@ function paintDocsContent() {
 
   document.getElementById("docs-banner-sub").textContent =
     lang === "tr"
-      ? "Gin tabanlı meta-çatı: ince çekirdek, geniş katalog."
-      : "Gin-based meta-framework: thin core, wide catalog.";
+      ? "Gin meta-çatısı: dosya rotaları, render modları, isteğe bağlı admin yardımcıları."
+      : "Gin meta-framework: file routes, render modes, opt-in admin helpers.";
   document.getElementById("docs-edit-prompt").textContent = lang === "tr" ? "Bir hata mı buldunuz?" : "Found a mistake?";
   document.getElementById("docs-edit-link").textContent = lang === "tr" ? "GitHub’da düzenle →" : "Edit on GitHub →";
   document.getElementById("docs-search").placeholder = lang === "tr" ? "Bölüme atla…" : "Jump to…";
