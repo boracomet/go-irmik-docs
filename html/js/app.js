@@ -384,6 +384,8 @@ const sections = [
       ul(
         l === "tr"
           ? [
+              `${strong("SSR şablon önbelleği")}: ${inline("render.Engine")} ${inline("page.html")} ve layout’ları bir kez derler (${inline("{{define}}")} / ${inline("{{block}}")} için Clone yalıtımı). Önbellek ${inline("Reload")} / ${inline("SetFuncs")} / ${inline("SetIslandFunc")} ile düşer. Disk düzenlemeleri yalnızca ${inline("Reload")} sonrası görünür (${inline("irmik dev")} zaten yeniler). İlk istek hâlâ parse eder — ${inline("MountPages")} ısınması yok.`,
+              `Parse ve eksik-dosya hataları test edilir; başarısız ${inline("Reload")} son iyi partials’ı korur.`,
               `${strong("ISR revalidate")}: arka plan yenileme, istekle aynı loader yolunu çalıştırır (ayrılmış ${inline("gin.Context")} üzerinde klonlanmış GET). Kullanıcıya özel ISR yok; loader’lar canlı ${inline("ResponseWriter")}’a bağlanmamalı.`,
               `${strong("SSE")}: bağlantı yazma deadline’ını temizler; sunucu ${inline("WriteTimeout")} (~30s) akışı kesmez. ${inline("IdleTimeout")} varsayılanı 60s.`,
               `${strong("Router 500")}: gövde genel ${inline("internal server error")}; ayrıntılar istek kimliğiyle loglanır.`,
@@ -395,6 +397,8 @@ const sections = [
               `${strong("Linking")}: ikiliye girmek import ile opt-in. ${inline("go get")} yine de modülden AWS/GORM/OTel indirir.`,
             ]
           : [
+              `${strong("SSR template cache")}: ${inline("render.Engine")} compiles ${inline("page.html")} and layouts once (Clone isolation for ${inline("{{define}}")} / ${inline("{{block}}")}). Cache drops on ${inline("Reload")} / ${inline("SetFuncs")} / ${inline("SetIslandFunc")}. Disk edits show after ${inline("Reload")} (${inline("irmik dev")} already reloads). First request still parses — no ${inline("MountPages")} warmup.`,
+              `Parse and missing-file failures are tested; a failed ${inline("Reload")} keeps the last good partials.`,
               `${strong("ISR revalidate")} runs the same loader path as the request (cloned GET on a detached ${inline("gin.Context")}). Per-user ISR is unsupported; loaders must not depend on the live ${inline("ResponseWriter")}.`,
               `${strong("SSE")} clears the write deadline so Server ${inline("WriteTimeout")} (~30s) does not kill streams. ${inline("IdleTimeout")} default is 60s.`,
               `Router ${strong("500s")} return a generic ${inline("internal server error")} body; details are logged with request id.`,
@@ -537,17 +541,22 @@ func main() {
       ul(
         l === "tr"
           ? [
-              `${strong("SSR")}: her istekte sunucuda render.`,
+              `${strong("SSR")}: her istekte sunucuda render. ${inline("render.Engine")} ${inline("page.html")} ve layout’ları ilk kullanımda derler (${inline("MountPages")} ısınması yok), sonra parse edilmiş ağacı yeniden kullanır.`,
               `${strong("SSG")}: derleme sırasında statik HTML.`,
               `${strong("ISR")}: önbellek + arka planda yeniden doğrulama.`,
               `${strong("HTMX / islands")}: kısmi yanıtlar ve Vite ile hydrate adacıklar.`,
             ]
           : [
-              `${strong("SSR")}: rendered on the server per request.`,
+              `${strong("SSR")}: rendered on the server per request. ${inline("render.Engine")} compiles ${inline("page.html")} and layouts on first use (no ${inline("MountPages")} warmup), then reuses the parsed tree.`,
               `${strong("SSG")}: static HTML at build time.`,
               `${strong("ISR")}: cache with background revalidation.`,
               `${strong("HTMX / islands")}: partials and Vite-hydrated islands.`,
             ],
+      ) +
+      p(
+        l === "tr"
+          ? `Paylaşılan partials her dosya için Clone edilir; böylece ${inline("{{define}}")} / ${inline("{{block}}")} adları çarpışmaz. Disk düzenlemeleri ${inline("Reload")} sonrası görünür (${inline("irmik dev")} zaten yeniler; ${inline("SetFuncs")} / ${inline("SetIslandFunc")} da önbelleği düşürür). Parse ve eksik-dosya hataları test edilir; başarısız ${inline("Reload")} son iyi partials’ı korur.`
+          : `Shared partials are Clone'd per file so ${inline("{{define}}")} / ${inline("{{block}}")} names cannot collide. Disk edits are visible after ${inline("Reload")} (${inline("irmik dev")} already reloads; ${inline("SetFuncs")} / ${inline("SetIslandFunc")} also drop the cache). Parse and missing-file failures are tested; a failed ${inline("Reload")} keeps the last good partials.`,
       ) +
       p(
         l === "tr"
