@@ -410,7 +410,7 @@ const sections = [
               `Çekirdek ${inline("go get github.com/boracomet/go-irmik")} AWS, GORM, OTel SDK, gRPC ve asynq ${strong("indirmez")}.`,
               `Ağır katalog paketleri iç içe modüllerdir; import yolları değişmedi. İç içe yolu ${inline("go get")} edin ve pinleyin, örn. ${inline("github.com/boracomet/go-irmik/irmik/db/gormx@v0.2.0")}.`,
               `SQL sürücüleri / Redis / migrate hâlâ kök modülle gelir; yalnızca import edilirse linklenir.`,
-              `Dürüst artık: küçük ${inline("otel/trace")} ve ${inline("otelhttp")} golang-migrate üzerinden kökte ${strong("indirect")} görünebilir; bu OTel SDK değildir.`,
+              `Dürüst kalan: küçük ${inline("otel/trace")} ve ${inline("otelhttp")} golang-migrate üzerinden kökte ${strong("indirect")} görünebilir; bu OTel SDK değildir.`,
               `Katalog API’leri dondurulmuş (yeni gormx özellikleri yok).`,
             ]
           : [
