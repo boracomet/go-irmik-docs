@@ -36,15 +36,15 @@ const copy = {
       { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD şablonları ve listeler için examples/admin." },
       { icon: "·", t: "Auth ve RBAC", d: "JWT/şifre akışları, roller, Can kontrolleri, Gin guard’ları." },
       { icon: "·", t: "SSE ve WebSocket", d: "Opt-in irmik/sse ve irmik/ws. SSE yazma deadline’ını temizler; ~30s WriteTimeout akışı kesmez." },
-      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build. irmik new, go-irmik v0.1.1 pinler; kardeş replace yok." },
-      { icon: "·", t: "Import ile linking", d: "Import etmediğiniz katalog paketi ikiliye girmez. go get yine de modülden AWS, GORM ve OTel indirir." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build. irmik new, go-irmik v0.2.0 pinler; kardeş replace yok." },
+      { icon: "·", t: "Import ile linking", d: "Çekirdek go get AWS, GORM, OTel SDK, gRPC ve asynq indirmez. Ağır katalog iç içe modüllerdir; SQL/Redis/migrate kökte kalır, yalnızca import edilirse linklenir." },
     ],
     codeTitle: "Idiomatik Go API",
     codeSub: "Gin benzeri yönlendirici; az soyutlama, net yüzey.",
     tabs: { basic: "Merhaba Dünya", routing: "Yönlendirme", middleware: "Ara katman" },
     startTitle: "Hızlı başlangıç",
     steps: [
-      { t: "Kur", d: "Modüle ekleyin: go get github.com/boracomet/go-irmik" },
+      { t: "Kur", d: "Modüle ekleyin: go get github.com/boracomet/go-irmik@v0.2.0" },
       { t: "Yaz", d: "irmik.New ile uygulama oluşturun; Gin rotası kaydedin." },
       { t: "Çalıştır", d: "go run main.go, varsayılan :8080" },
     ],
@@ -104,15 +104,15 @@ const copy = {
       { icon: "·", t: "HTMX Admin", d: "Flash↔HX, CRUD templates, and lists; see examples/admin." },
       { icon: "·", t: "Auth and RBAC", d: "JWT/password flows, roles, Can checks, Gin guards." },
       { icon: "·", t: "SSE and WebSocket", d: "Opt-in irmik/sse and irmik/ws. SSE clears the write deadline so WriteTimeout (~30s) does not kill streams." },
-      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build: scaffold, HMR, diagnostics. irmik new pins go-irmik v0.1.1." },
-      { icon: "·", t: "Import-opt-in linking", d: "Unused catalog packages stay out of the binary if you do not import them. go get still downloads AWS, GORM, and OTel from the module." },
+      { icon: "·", t: "irmik CLI", d: "irmik new, dev, routes, build: scaffold, HMR, diagnostics. irmik new pins go-irmik v0.2.0." },
+      { icon: "·", t: "Import-opt-in linking", d: "Core go get does not download AWS, GORM, the OTel SDK, gRPC, or asynq. Catalog heavies are nested modules; SQL/Redis/migrate stay in the root and link only if imported." },
     ],
     codeTitle: "Idiomatic Go API",
     codeSub: "Gin-like router; little abstraction, clear surface.",
     tabs: { basic: "Hello World", routing: "Routing", middleware: "Middleware" },
     startTitle: "Quick start",
     steps: [
-      { t: "Install", d: "Add to your module: go get github.com/boracomet/go-irmik" },
+      { t: "Install", d: "Add to your module: go get github.com/boracomet/go-irmik@v0.2.0" },
       { t: "Write", d: "Create an app with irmik.New; register a Gin route." },
       { t: "Run", d: "go run main.go, default :8080" },
     ],
@@ -196,8 +196,8 @@ if err != nil {
     panic(err)
 }
 
-// Recovery, request id, security headers: on by default
-app.EnableSecureDefaults()
+// Recovery, request id, security headers: mounted in New
+app.EnableSecureDefaults() // opt-in global rate limit
 
 // Per-group auth (your middleware)
 admin := app.Engine.Group("/admin")
@@ -253,7 +253,7 @@ let lang = readStoredLang();
 let dark = readInitialDark();
 let view = "home";
 let tab = "basic";
-let version = "v0.1.1";
+let version = "v0.2.0";
 let stars = null;
 let docsActive = "overview";
 let docsQuery = "";
@@ -337,7 +337,7 @@ function badges() {
   return `<div class="docs-badges">
     <span class="badge"><span class="badge-label">Go</span><span class="badge-value">1.25</span></span>
     <span class="badge"><span class="badge-label">License</span><span class="badge-value">MIT</span></span>
-    <span class="badge"><span class="badge-label">release</span><span class="badge-value">v0.1.1</span></span>
+    <span class="badge"><span class="badge-label">release</span><span class="badge-value">v0.2.0</span></span>
     <span class="badge"><span class="badge-label">build</span><span class="badge-value badge-value-ok">passing</span></span>
   </div>`;
 }
@@ -374,12 +374,75 @@ const sections = [
   },
   {
     id: "whats-new",
-    title: { tr: "main'de neler var", en: "What's new on main" },
+    title: { tr: "v0.2.0'da neler var", en: "What's new in v0.2.0" },
     body: (l) =>
       p(
         l === "tr"
-          ? `Wave 1 doğruluk geçişi ${inline("go-irmik")} ${inline("main")} üzerinde, ${inline("v0.1.1")} etiketinden sonra. Katalog donduruldu; yeni paket yok.`
-          : `Wave 1 correctness landed on ${inline("go-irmik")} ${inline("main")} after the ${inline("v0.1.1")} tag. The catalog is frozen; no new packages.`,
+          ? `Güncel sürüm ${inline("v0.2.0")} (2026-08-27). Katalog dondurulmuş; yeni paket yok. ${inline("v0.1.1")} imagex + geliştirme overlay’i olarak duruyor (overlay ${inline("development")} dışında monte edilmez).`
+          : `Current release is ${inline("v0.2.0")} (2026-08-27). The catalog is frozen; no new packages. ${inline("v0.1.1")} remains imagex + the development overlay (the overlay is not mounted outside ${inline("development")}).`,
+      ) +
+      p(
+        l === "tr"
+          ? `${strong("0.1.1’e göre kırıcı")} — bu yüzden 0.2.0:`
+          : `${strong("Breaking vs 0.1.1")} — why this is 0.2.0:`,
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `${inline("Context.MustUser")} kullanıcı yoksa panic eder. 401 için ${inline("auth.RequireAuth")} kullanın; anonim istekte ${inline("User()")} bakın.`,
+              `${inline("GitHubStub")} / ${inline("GoogleStub")}: ${inline("Exchange")} her zaman ${inline("ErrOAuthNotImplemented")} döner. Sahte GitHub/Google istemcisi yok.`,
+              `${inline("cache.New")} bilinmeyen sürücüde hata döner.`,
+            ]
+          : [
+              `${inline("Context.MustUser")} panics if no user is present. Use ${inline("auth.RequireAuth")} for 401; use ${inline("User()")} when the request may be anonymous.`,
+              `${inline("GitHubStub")} / ${inline("GoogleStub")}: ${inline("Exchange")} always returns ${inline("ErrOAuthNotImplemented")}. No fake GitHub/Google client.`,
+              `${inline("cache.New")} errors on unknown drivers.`,
+            ],
+      ) +
+      p(
+        l === "tr"
+          ? `${strong("İç içe modüller")} (katalog ağırlıkları kök ${inline("go get")} dışında):`
+          : `${strong("Nested modules")} (catalog heavies stay out of the root ${inline("go get")}):`,
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `Çekirdek ${inline("go get github.com/boracomet/go-irmik")} AWS, GORM, OTel SDK, gRPC ve asynq ${strong("indirmez")}.`,
+              `Ağır katalog paketleri iç içe modüllerdir; import yolları değişmedi. İç içe yolu ${inline("go get")} edin ve pinleyin, örn. ${inline("github.com/boracomet/go-irmik/irmik/db/gormx@v0.2.0")}.`,
+              `SQL sürücüleri / Redis / migrate hâlâ kök modülle gelir; yalnızca import edilirse linklenir.`,
+              `Dürüst artık: küçük ${inline("otel/trace")} ve ${inline("otelhttp")} golang-migrate üzerinden kökte ${strong("indirect")} görünebilir; bu OTel SDK değildir.`,
+              `Katalog API’leri dondurulmuş (yeni gormx özellikleri yok).`,
+            ]
+          : [
+              `Core ${inline("go get github.com/boracomet/go-irmik")} does ${strong("not")} download AWS, GORM, the OTel SDK, gRPC, or asynq.`,
+              `Catalog heavies are nested modules with unchanged import paths. ${inline("go get")} the nested path and pin, e.g. ${inline("github.com/boracomet/go-irmik/irmik/db/gormx@v0.2.0")}.`,
+              `SQL drivers / Redis / migrate still come with the root module; they are linked only if imported.`,
+              `Honest leftover: tiny ${inline("otel/trace")} and ${inline("otelhttp")} may appear as ${strong("indirect")} root deps via golang-migrate; that is not the OTel SDK.`,
+              `Catalog APIs remain frozen (no new gormx features).`,
+            ],
+      ) +
+      p(
+        l === "tr"
+          ? `${strong("v0.2.0’da ayrıca")} (önceki dokümanlara göre yeni veya netleşen):`
+          : `${strong("Also in v0.2.0")} (new or clarified vs previous docs):`,
+      ) +
+      ul(
+        l === "tr"
+          ? [
+              `${inline("EnableSecureHeaders")} ${inline("New")}’ın başlık yapılandırmasının ${strong("yerine geçer")}; ikinci bir middleware yığmaz. ${inline("Skip")} gerçekten varsayılanları düşürür.`,
+              `${strong("WS Hub")}: ${inline("ServeHTTP")} döngüyü tembel başlatır (${inline("Start")} / ${inline("Run")}). Unutulan ${inline("Start()")} HTTP goroutine’ini kilitlemez.`,
+              `${inline("irmik new")} ${inline("github.com/boracomet/go-irmik v0.2.0")} pinler, kardeş ${inline("replace")} yok, ${inline("GET /health")} iki kez kaydedilmez.`,
+            ]
+          : [
+              `${inline("EnableSecureHeaders")} ${strong("replaces")} the header config mounted in ${inline("New")}; it does not stack a second middleware. ${inline("Skip")} actually drops defaults.`,
+              `${strong("WS Hub")}: ${inline("ServeHTTP")} lazy-starts the loop (${inline("Start")} / ${inline("Run")}). A forgotten ${inline("Start()")} does not deadlock the HTTP goroutine.`,
+              `${inline("irmik new")} pins ${inline("github.com/boracomet/go-irmik v0.2.0")}, no sibling ${inline("replace")}, and does not double-register ${inline("GET /health")}.`,
+            ],
+      ) +
+      p(
+        l === "tr"
+          ? `${strong("Hâlâ doğru")} (Wave 1; gerileme yok):`
+          : `${strong("Still true")} (Wave 1; do not regress):`,
       ) +
       ul(
         l === "tr"
@@ -389,12 +452,8 @@ const sections = [
               `${strong("ISR revalidate")}: arka plan yenileme, istekle aynı loader yolunu çalıştırır (ayrılmış ${inline("gin.Context")} üzerinde klonlanmış GET). Kullanıcıya özel ISR yok; loader’lar canlı ${inline("ResponseWriter")}’a bağlanmamalı.`,
               `${strong("SSE")}: bağlantı yazma deadline’ını temizler; sunucu ${inline("WriteTimeout")} (~30s) akışı kesmez. ${inline("IdleTimeout")} varsayılanı 60s.`,
               `${strong("Router 500")}: gövde genel ${inline("internal server error")}; ayrıntılar istek kimliğiyle loglanır.`,
-              `${inline("irmik new")}: ${inline("github.com/boracomet/go-irmik v0.1.1")} pinler, kardeş ${inline("replace")} yok, ${inline("GET /health")} iki kez kaydedilmez.`,
-              `${strong("JWT refresh")}: ${inline("RefreshStore")} arayüzü. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC — çok kopyalı değil. Bellek içi rotasyonu üretim JWT’si olarak öğretmeyin.`,
-              `${strong("OAuth")}: ${inline("GitHubProvider")} / ${inline("GoogleProvider")} artık ${inline("GitHubStub")} / ${inline("GoogleStub")}. ${inline("Exchange")} her zaman ${inline("ErrOAuthNotImplemented")} döner. Sahte GitHub/Google istemcisi yok.`,
-              `${inline("Context.MustUser")}: kullanıcı yoksa panic (sıfır değer yerine; kırıcı).`,
-              `${inline("cache.New")}: bilinmeyen sürücüde hata döner.`,
-              `${strong("Linking")}: ikiliye girmek import ile opt-in. ${inline("go get")} yine de modülden AWS/GORM/OTel indirir.`,
+              `${strong("JWT refresh")}: ${inline("RefreshStore")} arayüzü. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC — çok kopyalı değil, Redis RefreshStore yok. Bellek içi rotasyonu üretim JWT’si olarak öğretmeyin.`,
+              `JWT erişim jetonları bir ${inline("jti")} içerir; bu bir erişim-jetonu denylist’i değildir.`,
             ]
           : [
               `${strong("SSR template cache")}: ${inline("render.Engine")} compiles ${inline("page.html")} and layouts once (Clone isolation for ${inline("{{define}}")} / ${inline("{{block}}")}). Cache drops on ${inline("Reload")} / ${inline("SetFuncs")} / ${inline("SetIslandFunc")}. Disk edits show after ${inline("Reload")} (${inline("irmik dev")} already reloads). First request still parses — no ${inline("MountPages")} warmup.`,
@@ -402,22 +461,13 @@ const sections = [
               `${strong("ISR revalidate")} runs the same loader path as the request (cloned GET on a detached ${inline("gin.Context")}). Per-user ISR is unsupported; loaders must not depend on the live ${inline("ResponseWriter")}.`,
               `${strong("SSE")} clears the write deadline so Server ${inline("WriteTimeout")} (~30s) does not kill streams. ${inline("IdleTimeout")} default is 60s.`,
               `Router ${strong("500s")} return a generic ${inline("internal server error")} body; details are logged with request id.`,
-              `${inline("irmik new")} pins ${inline("github.com/boracomet/go-irmik v0.1.1")}, no sibling ${inline("replace")}, and does not double-register ${inline("GET /health")}.`,
-              `${strong("JWT refresh")}: ${inline("RefreshStore")} interface. Default ${inline("MemoryRefreshStore")} is process-local with TTL/GC — not multi-replica. Do not treat in-memory rotation as production JWT.`,
-              `${strong("OAuth")}: ${inline("GitHubProvider")} / ${inline("GoogleProvider")} renamed to ${inline("GitHubStub")} / ${inline("GoogleStub")}. ${inline("Exchange")} always returns ${inline("ErrOAuthNotImplemented")}. No fake GitHub/Google client.`,
-              `${inline("Context.MustUser")} panics if no user is present (breaking vs a zero-value user).`,
-              `${inline("cache.New")} errors on unknown drivers.`,
-              `${strong("Linking")}: binary linking is opt-in via import. ${inline("go get")} still downloads AWS/GORM/OTel from the module.`,
+              `${strong("JWT refresh")}: ${inline("RefreshStore")} interface. Default ${inline("MemoryRefreshStore")} is process-local with TTL/GC — not multi-replica, no Redis RefreshStore. Do not treat in-memory rotation as production JWT.`,
+              `JWT access tokens include a ${inline("jti")}; it is not an access-token denylist.`,
             ],
       ) +
-      p(
-        l === "tr"
-          ? `${inline("v0.1.1")} etiketi hâlâ imagex + geliştirme overlay’i (overlay ${inline("development")} dışında monte edilmez).`
-          : `The ${inline("v0.1.1")} tag remains imagex + the development overlay (the overlay is not mounted outside ${inline("development")}).`,
-      ) +
       codeBlock(
-        `go get github.com/boracomet/go-irmik@main
-go install github.com/boracomet/go-irmik/cmd/irmik@main`,
+        `go get github.com/boracomet/go-irmik@v0.2.0
+go install github.com/boracomet/go-irmik/cmd/irmik@v0.2.0`,
         "terminal",
       ),
   },
@@ -430,12 +480,12 @@ go install github.com/boracomet/go-irmik/cmd/irmik@main`,
           ? [
               "Gin bilen, üstüne yapı ve keşfedilebilirlik isteyen Go ekipleri.",
               "Admin panelleri, dahili araçlar ve SSR ağırlıklı ürünler kuranlar.",
-              "Bağımlılığı import ile ekleyenler — ve go get’in modül grafiğini indirdiğini bilenler.",
+              "Bağımlılığı import ile ekleyenler — ağır katalog (AWS/GORM/OTel SDK/gRPC/asynq) için iç içe modülü ayrıca go get edenler.",
             ]
           : [
               "Go teams who know Gin and want structure and discoverability on top.",
               "Builders of admin panels, internal tools and SSR-heavy products.",
-              "People who opt in via import — and know go get still fetches the module graph.",
+              "People who opt in via import — and go get nested modules for catalog heavies (AWS/GORM/OTel SDK/gRPC/asynq).",
             ],
       ),
   },
@@ -469,12 +519,12 @@ go install github.com/boracomet/go-irmik/cmd/irmik@main`,
       ul(
         l === "tr"
           ? [
-              `${strong("Import ile linking:")} Kullanmadığın paket ikiliye girmez. ${inline("go get")} yine de AWS/GORM/OTel indirir.`,
+              `${strong("Import ile linking:")} Kullanmadığın paket ikiliye girmez. Çekirdek ${inline("go get")} AWS/GORM/OTel SDK/gRPC/asynq indirmez.`,
               `${strong("Keşfedilebilir:")} ${inline("irmik")} CLI ile rotaları ve modülleri listele.`,
               `${strong("Güvenli varsayılanlar:")} Üretimde zayıf sırlar reddedilir.`,
             ]
           : [
-              `${strong("Import-opt-in linking:")} a package you don't import never enters the binary. ${inline("go get")} still downloads AWS/GORM/OTel.`,
+              `${strong("Import-opt-in linking:")} a package you don't import never enters the binary. Core ${inline("go get")} does not download AWS/GORM/OTel SDK/gRPC/asynq.`,
               `${strong("Discoverable:")} list routes and modules with the ${inline("irmik")} CLI.`,
               `${strong("Safe defaults:")} weak secrets are rejected in production.`,
             ],
@@ -487,9 +537,9 @@ go install github.com/boracomet/go-irmik/cmd/irmik@main`,
       p(l === "tr" ? "Üç adımda çalışan bir sunucu:" : "A running server in three steps:") +
       codeBlock(
         `# 1: ${l === "tr" ? "kur" : "install"}
-go install github.com/boracomet/go-irmik/cmd/irmik@main
+go install github.com/boracomet/go-irmik/cmd/irmik@v0.2.0
 
-# 2: ${l === "tr" ? "yeni proje (v0.1.1 pin; kardeş replace yok)" : "new project (pins v0.1.1; no sibling replace)"}
+# 2: ${l === "tr" ? "yeni proje (v0.2.0 pin; kardeş replace yok)" : "new project (pins v0.2.0; no sibling replace)"}
 irmik new my-app && cd my-app
 
 # 3: ${l === "tr" ? "çalıştır" : "run"}
@@ -525,8 +575,8 @@ func main() {
       ) +
       callout(
         l === "tr"
-          ? `${inline("irmik new")} ${inline("GET /health")} rotasını iki kez kaydetmez. ${inline("go get github.com/boracomet/go-irmik")} ikiliye girmeyen AWS/GORM/OTel bağımlılıklarını yine de indirir.`
-          : `${inline("irmik new")} does not double-register ${inline("GET /health")}. ${inline("go get github.com/boracomet/go-irmik")} still downloads AWS/GORM/OTel even when they do not enter your binary.`,
+          ? `${inline("irmik new")} ${inline("GET /health")} rotasını iki kez kaydetmez. Çekirdek ${inline("go get github.com/boracomet/go-irmik@v0.2.0")} AWS, GORM, OTel SDK, gRPC ve asynq indirmez.`
+          : `${inline("irmik new")} does not double-register ${inline("GET /health")}. Core ${inline("go get github.com/boracomet/go-irmik@v0.2.0")} does not download AWS, GORM, the OTel SDK, gRPC, or asynq.`,
       ),
   },
   {
@@ -601,20 +651,22 @@ revalidate: 60s`,
       ul(
         l === "tr"
           ? [
-              `JWT erişim jetonları bir ${inline("jti")} içerir.`,
-              `${inline("RefreshStore")} ile yenileme/iptal. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC’dir; kopyalar arası paylaşılmaz. Bellek içi rotasyonu üretim JWT’si sanmayın.`,
+              `JWT erişim jetonları bir ${inline("jti")} içerir; bu bir erişim-jetonu denylist’i değildir.`,
+              `${inline("RefreshStore")} ile yenileme/iptal. Varsayılan ${inline("MemoryRefreshStore")} süreç-yerel TTL/GC’dir; kopyalar arası paylaşılmaz. Redis RefreshStore yok. Bellek içi rotasyonu üretim JWT’si sanmayın.`,
               'WebSocket, CORS, proxy ve upload varsayılanları "fail-closed" çalışır.',
               `${inline("MiddlewareJWT")} geçersiz bir jetonu yetkisiz sayar.`,
               `Router 500 yanıtı genel ${inline("internal server error")} gövdesidir; ayrıntılar istek kimliğiyle loglanır.`,
-              `${inline("Context.MustUser")} kullanıcı yoksa panic eder; anonim istekte ${inline("User()")} kullanın.`,
+              `${inline("Context.MustUser")} kullanıcı yoksa panic eder. 401 için ${inline("auth.RequireAuth")} kullanın; anonim istekte ${inline("User()")}.`,
+              `${inline("EnableSecureHeaders")} ${inline("New")}’ın başlık yapılandırmasının yerine geçer; ikinci middleware yığmaz. ${inline("Skip")} varsayılanları gerçekten düşürür.`,
             ]
           : [
-              `JWT access tokens include a ${inline("jti")}.`,
-              `Refresh/revoke uses a ${inline("RefreshStore")}. Default ${inline("MemoryRefreshStore")} is process-local TTL/GC, not shared across replicas. Do not treat in-memory rotation as production JWT.`,
+              `JWT access tokens include a ${inline("jti")}; it is not an access-token denylist.`,
+              `Refresh/revoke uses a ${inline("RefreshStore")}. Default ${inline("MemoryRefreshStore")} is process-local TTL/GC, not shared across replicas. There is no Redis RefreshStore. Do not treat in-memory rotation as production JWT.`,
               "WebSocket, CORS, proxy and upload defaults fail closed.",
               `${inline("MiddlewareJWT")} treats a present invalid token as unauthorized.`,
               `Router 500s return a generic ${inline("internal server error")} body; details are logged with request id.`,
-              `${inline("Context.MustUser")} panics if no user is present; use ${inline("User()")} when the request may be anonymous.`,
+              `${inline("Context.MustUser")} panics if no user is present. Use ${inline("auth.RequireAuth")} for 401; use ${inline("User()")} when the request may be anonymous.`,
+              `${inline("EnableSecureHeaders")} replaces the header config mounted in ${inline("New")}; it does not stack a second middleware. ${inline("Skip")} actually drops defaults.`,
             ],
       ) +
       callout(
@@ -622,6 +674,13 @@ revalidate: 60s`,
           ? 'Güvensiz bir davranışa gerçekten ihtiyacınız varsa, onu açık bir "unsafe" seçeneğiyle etkinleştirmeniz gerekir.'
           : 'If you truly need an unsafe behaviour, you must enable it with an explicit "unsafe" option.',
         "warn",
+      ) +
+      codeBlock(
+        `app.EnableSecureHeaders(middleware.SecureHeadersConfig{
+    FrameAncestors:   "'none'",
+    FrameOptionsSkip: true, // drops New's X-Frame-Options DENY
+})`,
+        "main.go",
       ),
   },
   {
@@ -638,11 +697,19 @@ revalidate: 60s`,
           ? `${inline("http.Server.WriteTimeout")} varsayılanı ~30s. SSE, bağlantının yazma deadline’ını temizler; bu süre açık akışı kesmemeli. ${inline("IdleTimeout")} varsayılanı 60s (keep-alive; aktif SSE yazımını sınırlamaz).`
           : `Default ${inline("http.Server.WriteTimeout")} is ~30s. SSE clears the per-connection write deadline so that timeout should not kill an open stream. ${inline("IdleTimeout")} defaults to 60s (keep-alive; it does not bound an active SSE write).`,
       ) +
+      p(
+        l === "tr"
+          ? `${inline("ws.Hub.ServeHTTP")} döngüyü tembel başlatır (${inline("Start")} / ${inline("Run")}). Unutulan ${inline("Start()")} HTTP goroutine’ini kilitlemez. ${inline("Start()")} hâlâ geçerlidir.`
+          : `${inline("ws.Hub.ServeHTTP")} lazy-starts the event loop (${inline("Start")} / ${inline("Run")}). A forgotten ${inline("Start()")} does not deadlock the HTTP goroutine. ${inline("Start()")} is still valid.`,
+      ) +
       codeBlock(`app.Engine.GET("/events", sse.Handler(sse.Options{
     Heartbeat: 15 * time.Second,
 }, func(s *sse.Stream) error {
     return s.Event("hello", gin.H{"ok": true})
-}))`),
+}))
+
+hub := ws.NewHub(opts)
+app.Engine.GET("/ws/chat", hub.ServeHTTP) // starts the loop if Start was skipped`),
   },
   {
     id: "cli",
@@ -654,7 +721,7 @@ revalidate: 60s`,
           : "The irmik CLI provides project scaffolding, a dev server and diagnostics.",
       ) +
       codeBlock(
-        `irmik new my-app     # ${l === "tr" ? "v0.1.1 pin; kardeş replace yok" : "pins v0.1.1; no sibling replace"}
+        `irmik new my-app     # ${l === "tr" ? "v0.2.0 pin; kardeş replace yok" : "pins v0.2.0; no sibling replace"}
 irmik dev            # ${l === "tr" ? "sıcak yeniden yükleme" : "hot reload"}
 irmik routes         # ${l === "tr" ? "tüm rotaları listele" : "list every route"}
 irmik build          # ${l === "tr" ? "üretim ikilisi / SSG" : "production binary / SSG"}`,
@@ -667,8 +734,13 @@ irmik build          # ${l === "tr" ? "üretim ikilisi / SSG" : "production bina
     body: (l) =>
       p(
         l === "tr"
-          ? `İhtiyaç duydukça import edin. Katalog ${strong("dondurulmuş")}: ince sarmalayıcılar yeni ürün gibi sunulmaz. Import etmediğiniz paket ikiliye girmez; ${inline("go get")} yine de modül grafiğini (AWS, GORM, OTel) indirir.`
-          : `Import what you need. The catalog is ${strong("frozen")}: thin wrappers are not advertised as new product. A package you do not import never enters the binary; ${inline("go get")} still downloads the module graph (AWS, GORM, OTel).`,
+          ? `İhtiyaç duydukça import edin. Katalog ${strong("dondurulmuş")}: ince sarmalayıcılar yeni ürün gibi sunulmaz. Yeni gormx özellikleri yok.`
+          : `Import what you need. The catalog is ${strong("frozen")}: thin wrappers are not advertised as new product. No new gormx features.`,
+      ) +
+      p(
+        l === "tr"
+          ? `Çekirdek ${inline("go get github.com/boracomet/go-irmik")} AWS, GORM, OTel SDK, gRPC ve asynq ${strong("indirmez")}. Katalog ağırlıkları iç içe modüllerdir; import yolları aynı. İç içe yolu ${inline("go get")} edin ve pinleyin, örn. ${inline("github.com/boracomet/go-irmik/irmik/db/gormx@v0.2.0")}. SQL sürücüleri / Redis / migrate kök modülle gelir; yalnızca import edilirse linklenir. Küçük ${inline("otel/trace")} ve ${inline("otelhttp")} golang-migrate üzerinden kökte indirect görünebilir — bu OTel SDK değildir.`
+          : `Core ${inline("go get github.com/boracomet/go-irmik")} does ${strong("not")} download AWS, GORM, the OTel SDK, gRPC, or asynq. Catalog heavies are nested modules with unchanged import paths. ${inline("go get")} the nested path and pin, e.g. ${inline("github.com/boracomet/go-irmik/irmik/db/gormx@v0.2.0")}. SQL drivers / Redis / migrate still come with the root module; they are linked only if imported. Tiny ${inline("otel/trace")} and ${inline("otelhttp")} may appear as indirect root deps via golang-migrate — that is not the OTel SDK.`,
       ) +
       catalogGrid([
         ["irmik/auth", l === "tr" ? "JWT / oturum yardımcıları (OAuth istemcisi değil)" : "JWT / session helpers (not an OAuth client)"],
@@ -677,7 +749,9 @@ irmik build          # ${l === "tr" ? "üretim ikilisi / SSG" : "production bina
         ["irmik/sse · ws", "SSE & WebSocket"],
         ["irmik/cache", l === "tr" ? "Önbellek; cache.New bilinmeyen sürücüde hata verir" : "Cache; cache.New errors on unknown drivers"],
         ["irmik/openapi", l === "tr" ? "Deneysel OpenAPI (Swagger UI CDN)" : "Experimental OpenAPI (Swagger UI via CDN)"],
-        ["irmik/db · gormx", l === "tr" ? "SQL + isteğe bağlı GORM" : "SQL + optional GORM"],
+        ["irmik/db", l === "tr" ? "SQL sürücüleri kökte; import ile link" : "SQL drivers in root; link if imported"],
+        ["irmik/db/gormx", l === "tr" ? "İç içe modül; @v0.2.0 pin (yeni API yok)" : "Nested module; pin @v0.2.0 (no new APIs)"],
+        ["s3x · otelx · grpcx · asynqx", l === "tr" ? "İç içe modüller; kök go get bunları indirmez" : "Nested modules; root go get does not download them"],
         ["irmik/admin · htmx", l === "tr" ? "Admin UI yardımcıları" : "Admin UI helpers"],
       ]),
   },
@@ -687,8 +761,8 @@ irmik build          # ${l === "tr" ? "üretim ikilisi / SSG" : "production bina
     body: (l) =>
       p(
         l === "tr"
-          ? `Güncel etiket ${inline("v0.1.1")} (imagex + dev overlay). Wave 1 doğruluk ${inline("main")} üzerinde. Katalog dondurulmuş. CI, ${inline("main")} üzerinde yarış (race) testleri, linting ve güvenlik açığı taramaları çalıştırır. API 1.0'a kadar değişebilir.`
-          : `Current tag is ${inline("v0.1.1")} (imagex + dev overlay). Wave 1 correctness is on ${inline("main")}. The catalog is frozen. CI runs race tests, linting and vulnerability checks on ${inline("main")}. The API may change until 1.0.`,
+          ? `Güncel etiket ${inline("v0.2.0")} (2026-08-27). Katalog dondurulmuş. CI, ${inline("main")} üzerinde yarış (race) testleri, linting ve güvenlik açığı taramaları çalıştırır. API 1.0'a kadar değişebilir.`
+          : `Current tag is ${inline("v0.2.0")} (2026-08-27). The catalog is frozen. CI runs race tests, linting and vulnerability checks on ${inline("main")}. The API may change until 1.0.`,
       ),
   },
   {
