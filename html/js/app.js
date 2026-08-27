@@ -8,9 +8,9 @@ const copy = {
     search: "Dokümanlarda ara...",
     hero: {
       badge: "{v} · Go 1.25",
-      title: "Go için hızlı, yenilikçi",
-      titleAccent: "Web çatısı.",
-      sub: "Go-İrmik, Gin üzerine kurulu bir meta-çatı: dosya tabanlı rotalar, SSR/SSG/ISR ve isteğe bağlı admin yardımcıları. Megakit değil.",
+      title: "Gin kalır.",
+      titleAccent: "Uygulama katmanını her Cuma yeniden kurmayı bırak.",
+      sub: "Hâlâ Gin yazıyorsun (app.Engine bir *gin.Engine). İrmik, her Cuma yeniden yazmayı bıraktığın katman: dosya rotaları (app/**/page.html), SSR/SSG/ISR, oturum/CSRF/RBAC, HTMX admin. Salt JSON API’lere İrmik gerekmez.",
       primary: "Dokümanlar",
       secondary: "GitHub",
       installed: "kuruldu",
@@ -62,7 +62,7 @@ const copy = {
     madeWith: "Bu websitesi İrmik ile build edildi",
     copyright: "© 2026 Go-İrmik. MIT License.",
     sidebar: "Başlarken",
-    pageTitle: "Go-İrmik: Go için hızlı, yenilikçi web çatısı",
+    pageTitle: "Go-İrmik: Gin kalır. Uygulama katmanını her Cuma yeniden kurmayı bırak.",
     cookie: {
       title: "Kurabiye mi? İrmik sütü tercih eder, ama tercihler için bir kırıntı yeter.",
       body: "Dil ve tema tercihlerinizi yerel depolamada (ve gerekirse çerezlerde) tutuyoruz. Takip yok.",
@@ -76,9 +76,9 @@ const copy = {
     search: "Search the docs...",
     hero: {
       badge: "{v} · Go 1.25",
-      title: "Fast, innovative",
-      titleAccent: "web framework for Go.",
-      sub: "Go-Irmik is a Gin meta-framework: file routes, SSR/SSG/ISR, and opt-in admin helpers. Not a megakit.",
+      title: "Keep Gin.",
+      titleAccent: "Stop rebuilding the application layer.",
+      sub: "You still write Gin (app.Engine is *gin.Engine). Irmik is the Friday glue you stop rewriting: file routes (app/**/page.html), SSR/SSG/ISR, session/CSRF/RBAC, HTMX admin. JSON-only APIs do not need Irmik.",
       primary: "Docs",
       secondary: "GitHub",
       installed: "installed",
@@ -130,7 +130,7 @@ const copy = {
     madeWith: "This website is built with Irmik",
     copyright: "© 2026 Go-Irmik. MIT License.",
     sidebar: "Getting Started",
-    pageTitle: "Go-Irmik: Fast, innovative web framework for Go",
+    pageTitle: "Go-Irmik: Keep Gin. Stop rebuilding the application layer.",
     cookie: {
       title: "Cookies? We prefer milk, but Irmik will take a crumb for prefs.",
       body: "We use local storage (and cookies if needed) only for language and theme. No tracking crumbs.",
@@ -378,8 +378,8 @@ const sections = [
     body: (l) =>
       p(
         l === "tr"
-          ? `Güncel sürüm ${inline("v0.2.0")} (2026-08-27). Katalog dondurulmuş; yeni paket yok. ${inline("v0.1.1")} imagex + geliştirme overlay’i olarak duruyor (overlay ${inline("development")} dışında monte edilmez).`
-          : `Current release is ${inline("v0.2.0")} (2026-08-27). The catalog is frozen; no new packages. ${inline("v0.1.1")} remains imagex + the development overlay (the overlay is not mounted outside ${inline("development")}).`,
+          ? `${strong("Gin kalır.")} Uygulama katmanını her Cuma yeniden kurmayı bırak. Güncel sürüm ${inline("v0.2.0")} (2026-08-27). Katalog dondurulmuş; yeni paket yok. ${inline("v0.1.1")} imagex + geliştirme overlay’i olarak duruyor (overlay ${inline("development")} dışında monte edilmez).`
+          : `${strong("Keep Gin.")} Stop rebuilding the application layer. Current release is ${inline("v0.2.0")} (2026-08-27). The catalog is frozen; no new packages. ${inline("v0.1.1")} remains imagex + the development overlay (the overlay is not mounted outside ${inline("development")}).`,
       ) +
       p(
         l === "tr"
@@ -475,6 +475,11 @@ go install github.com/boracomet/go-irmik/cmd/irmik@v0.2.0`,
     id: "who-for",
     title: { tr: "Kimler için?", en: "Who is this for?" },
     body: (l) =>
+      p(
+        l === "tr"
+          ? `${strong("Gin kalır.")} İrmik, her Cuma yeniden kurmayı bıraktığın katman — yeni bir yığın değil.`
+          : `${strong("Keep Gin.")} Irmik is the Friday glue you stop rewriting — not a new stack.`,
+      ) +
       ul(
         l === "tr"
           ? [
